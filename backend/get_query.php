@@ -4,11 +4,11 @@ global $db;
 
 $username = "";
 $password = "";
-if (isset($_GET['username'])) {
-    $username = safe_get('username');
+if (isset($_POST['username'])) {
+    $username = safe_post('username');
 }
-if (isset($_GET['password'])) {
-    $password = safe_get('password');
+if (isset($_POST['password'])) {
+    $password = safe_post('password');
     // TODO: hash passwords
     // hash("sha256", $password)
 }

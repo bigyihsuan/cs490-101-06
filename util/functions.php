@@ -10,11 +10,23 @@ if (mysqli_connect_errno()) {
     exit();
 }
 
-function safe_get($name)
+function safe_get($name, $type)
 {
     global $db;
 
     $v = $_GET[$name];
+    $v = trim($v);
+    if ($v != "") {
+        $v = mysqli_real_escape_string($db, $v);
+    }
+    return $v;
+}
+
+function safe_post($name, $type)
+{
+    global $db;
+
+    $v = $_POST[$name];
     $v = trim($v);
     if ($v != "") {
         $v = mysqli_real_escape_string($db, $v);
