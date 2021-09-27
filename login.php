@@ -1,5 +1,5 @@
 <?php
-include("../util/functions.php");
+include("util/functions.php");
 
 session_start();
 
@@ -27,9 +27,9 @@ if ($username != "" && $password != "") {
         $access_level = $row['access'];
 
         if ($access_level == "ADMIN") {
-            header("refresh:0; url=./admin.html");
+            header("refresh:0; url=webpages/admin.html");
         } else {
-            header("refresh:0; url=./user.html");
+            header("refresh:0; url=webpages/user.html");
         }
     } else {
         // return to login
@@ -45,13 +45,13 @@ if ($username != "" && $password != "") {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="webpages/front.css">
+    <link rel="stylesheet" href="front.css">
 </head>
 
 <body>
     <h2>hello CS 490!!!!!!</h2><br>
     <div class="Login">
-        <form action="webpages/login.php" method="post">
+        <form action="login.php" method="post">
             <label><b>User Name</b></label><br><br>
             <input type="text" name="username" id="user"><br><br><br>
             <label><b>Password</b></label><br><br>
