@@ -6,7 +6,7 @@ ini_set('display_errors', 1);
 // sql boilerplate
 include("../account.php");
 
-function safe_get($name, $type)
+function safe_get($name)
 {
     global $db;
 
@@ -18,7 +18,7 @@ function safe_get($name, $type)
     return $v;
 }
 
-function safe_post($name, $type)
+function safe_post($name)
 {
     global $db;
 
