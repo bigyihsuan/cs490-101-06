@@ -19,3 +19,4 @@ shuffle(access)
 
 for vals in zip(names, passes, access):
     print(npa(*vals), end=', ')
+print()

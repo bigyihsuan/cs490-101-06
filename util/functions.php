@@ -29,3 +29,23 @@ function safe_post($name)
     }
     return $v;
 }
+
+function is_authenticated($username, $password) {
+    global $db;
+
+    // get the matchings users
+    // if none, don't bother checing password and go back to login
+    $num_users_query = "SELECT * FROM users WHERE name='$username'";
+    ($users = $db->query($query)) or die($db->error);
+
+    if ($users->num_rows == 0) {
+        return false;
+    }
+
+    // get the full row of $username
+    $row = $users->fetch_assoc();
+    $password_hash = $row['pass'];
+
+    return password_validate($password, $password_hash);
+}
+

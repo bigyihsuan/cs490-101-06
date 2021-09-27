@@ -1,6 +1,8 @@
 <?php
 include("../util/functions.php");
 
+session_start();
+
 global $db;
 
 $username = "";
@@ -14,10 +16,15 @@ if (isset($_POST['password'])) {
     // hash("sha256", $password)
 }
 
-$query = "SELECT * FROM users WHERE name='$username' AND pass='$password'";
-// $query = "SELECT * FROM cs490_Users";
-($users = $db->query($query)) or die($db->error);
+if ($username != "" && $password != "") {
+    $_SESSION['is_logged'] = is_authenticated($username, $password);
+    
+    if ($_SESSION['is_logged']) {
+        // get access level
+        
+    } else {
+        // return to login
 
-while ($row = $users->fetch_assoc()) {
-    printf("<p>id={$row['user_id']} name={$row['name']} pass={$row['pass']} access={$row['access']}</p>");
+    }
 }
+?>
