@@ -5,10 +5,6 @@ ini_set('display_errors', 1);
 
 // sql boilerplate
 include("../account.php");
-$db = mysqli_connect($hostname, $username, $password, $project);
-if (mysqli_connect_errno()) {
-    exit();
-}
 
 function safe_get($name, $type)
 {
