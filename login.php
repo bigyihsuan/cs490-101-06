@@ -35,7 +35,7 @@ if ($username != "" && $password != "") {
         // return to login
         print "Incorrect username or password. Please try again.<br>";
         print "Redirecting in 5 seconds...";
-        header("refresh:5; url=webpages/user.html");
+        header("refresh:5; url=login.html");
     }
 }
 ?>
