@@ -51,7 +51,7 @@ if ($username != "" && $password != "") {
 <body>
     <h2>hello CS 490!!!!!!</h2><br>
     <div class="Login">
-        <form action="./backend/get_query.php" method="post">
+        <form action="webpages/login.php" method="post">
             <label><b>User Name</b></label><br><br>
             <input type="text" name="username" id="user"><br><br><br>
             <label><b>Password</b></label><br><br>
