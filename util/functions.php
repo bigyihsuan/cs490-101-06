@@ -36,7 +36,7 @@ function is_authenticated($username, $password) {
     // get the matchings users
     // if none, don't bother checing password and go back to login
     $num_users_query = "SELECT * FROM users WHERE name='$username'";
-    ($users = $db->query($query)) or die($db->error);
+    ($users = $db->query($num_users_query)) or die($db->error);
 
     if ($users->num_rows == 0) {
         return false;

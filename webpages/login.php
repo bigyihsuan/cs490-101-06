@@ -21,8 +21,8 @@ if ($username != "" && $password != "") {
     
     if ($_SESSION['is_logged']) {
         // get access level
-        $num_users_query = "SELECT access FROM users WHERE name='$username'";
-        ($users = $db->query($query)) or die($db->error);
+        $access_level_query = "SELECT access FROM users WHERE name='$username'";
+        ($users = $db->query($access_level_query)) or die($db->error);
         $row = $users->fetch_assoc();
         $access_level = $row['access'];
 
