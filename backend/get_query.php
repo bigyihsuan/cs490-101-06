@@ -1,5 +1,6 @@
 <?php
 include("../util/functions.php");
+include_once("../webpages/login.html");
 global $db;
 
 $username = "";
