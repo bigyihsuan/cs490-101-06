@@ -14,7 +14,7 @@ if (isset($_POST['password'])) {
     // hash("sha256", $password)
 }
 
-$query = "SELECT * FROM cs490_Users WHERE name='$username' AND pass='$password'";
+$query = "SELECT * FROM users WHERE name='$username' AND pass='$password'";
 // $query = "SELECT * FROM cs490_Users";
 ($users = $db->query($query)) or die($db->error);
 
