@@ -46,6 +46,6 @@ function is_authenticated($username, $password) {
     $row = $users->fetch_assoc();
     $password_hash = $row['pass'];
 
-    return password_validate($password, $password_hash);
+    return password_verify($password, $password_hash);
 }
 
