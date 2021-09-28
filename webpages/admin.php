@@ -1,10 +1,3 @@
-<?php
-session_start();
-if (!isset($_SESSION['logged_user'])) {
-    header("refresh:2; url=/login.html");
-}
-?>
-
 <html lang="en">
 
 <head>
