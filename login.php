@@ -23,7 +23,7 @@ if ($username != "" && $password != "") {
         ($users = $db->query($access_level_query)) or die($db->error);
         $row = $users->fetch_assoc();
         $access_level = $row['access'];
-        $_SESSION['logged_user'] = $row['name'];
+        $_SESSION['logged_user'] = $username;
 
         if ($access_level == "ADMIN") {
             header("refresh:0; url=webpages/admin.php");
