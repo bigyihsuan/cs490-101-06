@@ -6,4 +6,4 @@ if ($_SESSION['is_logged']) {
 
 unset($_SESSION['logged_user']);
 session_destroy();
-header("refresh:2; url=/login.html");
+header("refresh:0; url=/login.html");
