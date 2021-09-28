@@ -11,7 +11,7 @@
     <?php echo "<p>Greetings {$_SESSION['logged_user']}!</p>" ?>
     <p>You are an <strong>ADMIN!</strong></p>
     <br>
-    <a href="/backend/logout.html">Logout</a>
+    <a href="/backend/logout.php">Logout</a>
 </body>
 
 </html>
