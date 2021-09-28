@@ -1,28 +1,32 @@
 body {
     margin: 0;  
     padding: 0;
-    background-color: powderblue;
-    font-family: 'Arial';  
+    background-image: url(images/loginBackground.png);
+    font-family: 'Tahoma';  
   }
 .Login{  
-        width: 375px;  
+        width: 50%;  
         overflow: hidden;  
-        margin:auto;
-        margin: 20 0 0 350px;  
-        padding: 80px;  
-        background: #23463f;  
-        border-radius: 15px ;  
+        margin: auto; 
+        padding: 12px;   
+        border-color: white;
+        border-radius: 12px ;  
+        padding: center;
+        text-align: center;
+        letter-spacing: 1px;
 }  
 
 h2{  
     text-align: center;  
-    color: #277582;  
+    color: #ebebeb;  
+    margin: auto;
     padding: 20px;  
+    letter-spacing: 2px;
 }  
 
 label{  
      
-    color: #08ffd1;  
+    color: #cbe6e2;  
     font-size: 17px;  
 }  
 
@@ -32,6 +36,7 @@ label{
     border: none;  
     border-radius: 3px;  
     padding-left: 8px;  
+    
 }  
 #pass{  
     width: 355px;  
@@ -47,7 +52,7 @@ label{
     border: none;  
     border-radius: 17px;  
     padding-left: 8px;  
-    color: rgb(25, 0, 255);  
+    color: rgb(0, 0, 0);  
   
   
 }  
