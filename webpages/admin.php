@@ -8,7 +8,8 @@
 </head>
 
 <body>
-    <?php echo "<p>Greetings {$_SESSION['logged_user']}!</p>" ?>
+    <?php session_start();
+    echo "<p>Greetings {$_SESSION['logged_user']}!</p>" ?>
     <p>You are an <strong>ADMIN!</strong></p>
     <br>
     <a href="/backend/logout.php">Logout</a>
