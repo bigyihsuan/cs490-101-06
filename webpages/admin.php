@@ -1,6 +1,7 @@
 <?php
+session_start();
 if (!isset($_SESSION['logged_user'])) {
-    header("refresh:0; url=login.html");
+    header("refresh:0; url=/login.html");
 }
 ?>
 

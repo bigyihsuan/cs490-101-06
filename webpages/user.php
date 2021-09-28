@@ -1,6 +1,7 @@
 <?php
+session_start();
 if (!isset($_SESSION['logged_user'])) {
-    header("refresh:0; url=login.html");
+    header("refresh:0; url=/login.html");
 }
 ?>
 
@@ -17,7 +18,7 @@ if (!isset($_SESSION['logged_user'])) {
     <?php echo "<p>Greetings {$_SESSION['logged_user']}!</p>" ?>
     <p>You are a <strong>USER!</strong></p>
     <br>
-    <a href="/backend/logout.php">Logout</a>
+    <a href="/backend/logout.hp">Logout</a>
 </body>
 
 </html>
