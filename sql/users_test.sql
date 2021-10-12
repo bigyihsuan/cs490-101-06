@@ -1,4 +1,4 @@
-CREATE TABLE Users (
+CREATE TABLE Users_test (
     user_id INT NOT NULL AUTO_INCREMENT,
     name VARCHAR(255) NOT NULL,
     pass VARCHAR(255) NOT NULL, 
@@ -7,7 +7,7 @@ CREATE TABLE Users (
 );
 
 -- test users
-INSERT INTO Users (name, pass, access)
+INSERT INTO Users_test (name, pass, access)
 VALUES
     ('bob', '$2y$10$58u.dF0qeP2Js6/hP/bkZuA.zDAHH.og8bHD0TGguzJjQEdnMDaw6', 'USER'),
     ('doug', '$2y$10$EnO1EejAYPqYcDjRVRD7I.AZ6/wemVz5B/bzT9QWkyPu5VCSDzU0e', 'USER'),
@@ -18,3 +18,4 @@ VALUES
 
 
 -- mysql -h us-cdbr-east-04.cleardb.com -u b9960caeae98e0 -p5ee5fe3e
+-- heroku_454624e55acb805
