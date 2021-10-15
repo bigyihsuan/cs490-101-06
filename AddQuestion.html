@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link href="student.css" rel="stylesheet">
+	<title>AddQuestions Page</title>
+</head>
+<body>
+		<nav>
+			<ul>
+				<li>
+					<a href="Instructor.html">Home</a>
+				</li>
+				<li>
+					<a href="AddQuestion.html">Add Questions</a>
+				</li>
+				<li>
+					<a href="CreateExam.html">Create Exam</a>
+				</li>
+				<li>
+					<a href="AutoGradeExam.html">AutoGrade Exam</a>
+				</li>
+				<li>
+					<a href="ReviewExam.html">Review Exam</a>
+				</li>
+				<li>
+					<a href="ReleaseGrade.html">Release Grade</a>
+				</li>
+				<li>
+					<a class="active" href="login.html">Log Out</a>
+				</li>
+			</ul>
+			<div class="handle">
+				Menu
+			</div>
+		</nav>
+		<header id="aa">
+			<h1 style="text-align:center; color: #ebebeb;">Add Questions</h1>
+		</header>
+
+	<form action="AddQuestion.php" method="post">
+			<div id="aa">
+				<label class="desc" for="question" id="question" style="text-align:center;">Question Box</label>
+                <div>
+                <textarea id="question" name="question" spellcheck="true" style="width:90%;height:100px;" tabindex="1"></textarea>
+                </div>
+			</div><br>
+			<div id="aa">
+				<label class="desc" for="function_name" id="function_name">Function Name</label> <div><input class="field text fn" id="function_name" name="function_name" size="20" tabindex="2" type="text" value=""></div>
+			</div><br>
+			<div id="aa">
+				<label>Category<div><select name="type">
+					<option value="none">
+						None
+					</option>
+					<option value="recursion">
+						Recursion
+					</option>
+					<option value="forloop">
+						For Loop
+					</option>
+					<option value="whileloop">
+						While Loop
+					</option>
+					<option value="conditional">
+						Conditional
+					</option>
+					<option value="indexing">
+						Indexing
+					</option>
+				</select></div></label>
+			</div><br>
+			<div id="aa">
+				<label id="aa">Difficulty Level <div><select name="difficulty">
+					<option value="Easy">
+						Easy
+					</option>
+					<option value="Medium">
+						Medium
+					</option>
+					<option value="Hard">
+						Hard
+					</option>
+				</select></div></label>
+			</div><br>
+			<div id="aa">
+				<label class="desc" for="point_value" id="point_value">Points Worth</label><div> <input id="point_value" name="point_value" size="20" spellcheck="true" tabindex="3"></div>
+			</div><br>
+			<div id="aa">
+				<label class="desc" for="test_case" id="test_case">Test Case Input</label><div> <input id="test_case" name="test_case" size="50" spellcheck="true" tabindex="4"></div>Separate the cases with " || " (e.g. "+",4,5 || "-",7,6 || "*",1,2)
+			</div><br>
+			<div id="aa">
+                <label class="desc" for="test_result" id="test_result">Test Case Result</label><div> <input id="test_result" name="test_result" size="50" spellcheck="true" tabindex="5"></div>Separate the results of cases with " || " (e.g. 9 || 1 || 2)
+			</div><br>
+			<div>
+                <button id="saveForm" name="saveForm" type="submit" value="Submit">Submit</button>
+			</div>
+	</form>
+	
+</body>
+</html>
