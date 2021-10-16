@@ -33,6 +33,49 @@
 				Menu
 			</div>
 		</nav>
+		<h1 style="text-align:center; color: #ebebeb;">Review Stuent's Exam Grades for edit and comment</h1>
+	<table style="width: 100%;">
+		<tr>
+				<td style="width:50%;padding-left:10px;padding-right:10px;padding-top:35px;" valign="top">
+					<form action="<?=$_SERVER['PHP_SELF'];?>" method="post">
 	
+						<div>
+							<div>
+								<p style="color: #ebebeb;">Name:</p>
+								<input class="field text" id="function_name" name="studentname" size="20" tabindex="2" type="text" value="">
+								<br>
+							</div>
+							<div>
+								<p style="color: #ebebeb;">Change Grades:</p>
+								<input class="field text" id="function_name" name="studentgrades" size="20" tabindex="2" type="text" value="">
+								<br>
+							</div>
+							<div>
+								<p style="color: #ebebeb;">Add Comments:</p>
+								<textarea id="comments" name="addcomments" spellcheck="true" style="width:90%;height:100px;" tabindex="1"></textarea>
+								<br>
+							</div>
+							<br>
+							<div>
+								<button id="submit" name="submit" type="submit" value="all" style="margin-bottom:20px;">Submit</button>
+							</div>
+						</div>
+					
+					</form>
+	
+		
+	
+				</td>
+				<td style="width:50%;padding-left:5%;padding-right:5%;padding-top:35px;" valign="top">
+						<form action="SubmitPoints.php" id="testtime" method="post" name="testtime">
+								<div>
+									<p style="color: #ebebeb;">Grade Chart For Review and Edit:</p>	
+									<?php include("GradeChart.php");>
+								</div>
+								
+						</form>
+				</td>
+		</tr>
+	</table>
 </body>
 </html>
