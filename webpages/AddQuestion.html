@@ -89,38 +89,10 @@
 				<label class="desc" for="point_value" id="point_value">Points Worth</label><div> <input id="point_value" name="point_value" size="20" spellcheck="true" tabindex="3"></div>
 			</div><br>
 
-			<!--
-			<div id="aa">
-				<label class="desc" for="test_case" id="test_case">Test Case Input</label><div> <input id="test_case" name="test_case" size="50" spellcheck="true" tabindex="4"></div>Separate the cases with " || " (e.g. "+",4,5 || "-",7,6 || "*",1,2)
-			</div><br>
-			<div id="aa">
-                <label class="desc" for="test_result" id="test_result">Test Case Result</label><div> <input id="test_result" name="test_result" size="50" spellcheck="true" tabindex="5"></div>Separate the results of cases with " || " (e.g. 9 || 1 || 2)
-			</div><br>
-			<div>
-				<button id="testcasesubmit" name="testcasesubmit" type="testcasesubmit" value="testcasesubmit">Test Case Submit</button>
-			</div>
-				
-			<div>
-                <button id="saveForm" name="saveForm" type="submit" value="Submit">Submit Question</button>
-			</div>
 			
-
-	<div>		
-        <div class="form-group">
-            <label for="tagImportBox" style="color: #ebebeb;">Input</label> 
-            <input type="text" class="form-control" id="tagImportBox" /><br>
-			<label for="tagImportBox" style="color: #ebebeb;">Result</label> 
-            <input type="text" class="form-control" id="tagImportBox" /><br>
-        </div>
-
-        <button class="btn btn-primary" onclick="parseTags()">Import</button>
-    </div>
-	-->
-    <!-- <button type="button" class="btn btn-primary" id="fileExport" onclick="exportCSV()">Export CSV</button>
-        <button type="button" class="btn btn-primary" id="fileImport" onclick="importCSV()">Import CSV</button> -->
     <br />
     <div id="tags" class="container-fluid"></div>
-    <button type="button" class="btn btn-primary" onclick="addTag()">Add New Test Cases</button>
+    <button type="button" class="btn btn-primary" onclick="addTag()">Add Test Cases</button>
     <button type="button" class="btn btn-primary" onclick="removeAllTags()">Remove All Test Cases</button>
 
 
@@ -146,11 +118,9 @@
                     </div>
                 </div>
                 <div class="btn-group col-md-4" role="group" aria-label="Tag Buttons">
-                    <button type="button" class="btn btn-outline-primary" title="Increment" onclick="increment(this)">&#10133;</button>
-                    <button type="button" class="btn btn-outline-primary" title="Decrement" onclick="decrement(this)">&#10134;</button>
+                    
                     <button type="button" class="btn btn-secondary" title="Delete" onclick="removeTag(this)">&#10060;</button>
-                    <button type="button" class="btn btn-outline-primary" title="Move Up" onclick="moveUp(this)">&#11014;</button>
-                    <button type="button" class="btn btn-outline-primary" title="Move Down" onclick="moveDown(this)">&#11015;</button>
+                   
                 </div>
             </div>`;
             // <!-- <input class="form-control" type="number" id="counter" min="0" value="0" /> -->
@@ -170,47 +140,12 @@
             $(ele).parents("[id^=row]").empty();
         }
 
-        function increment(ele) {
-            var counter = $(ele).parent().parent().find("[id^=counter]");
-            var maxCounter = $(ele).parent().parent().find("[id^=max]");
-            counter.html(Number(counter.html()) + 1);
-            if (counter.html() > maxCounter.html()) {
-                maxCounter.html(counter.html());
-            }
-        }
-
-        function decrement(ele) {
-            var counter = $(ele).parent().parent().find("[id^=counter]");
-            var maxCounter = $(ele).parent().parent().find("[id^=max]");
-            counter.html(Number(counter.html()) - 1);
-            if (counter.html() < 0) {
-                counter.html(0);
-            }
-        }
-
-        function moveUp(ele) {
-            var e = $($(ele).parents("*[id]").toArray()[0]);
-            e.prev().insertAfter(e);
-        }
-
-        function moveDown(ele) {
-            var e = $($(ele).parents("*[id]").toArray()[0]);
-            e.next().insertBefore(e);
-        }
-
         function parseTags() {
             text = $('#tagImportBox').val();
             tags = text.split(',').map(s => s.trim());
             tags.forEach(t => addTag(t));
         }
-        // function exportCSV() {
-        //     const fileExport = $("#fileExport");
-        //     fileExport.addEventListener
-        // }
-
-        // function importCSV() {
-
-        // }
+       
     </script>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
