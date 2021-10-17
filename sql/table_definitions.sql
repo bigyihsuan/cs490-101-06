@@ -11,8 +11,6 @@ CREATE TABLE Question (
     question_text VARCHAR(255) NOT NULL,
     difficulty ENUM('EASY', 'MEDIUM', 'HARD') NOT NULL,
     PRIMARY KEY (question_id)
-    -- test cases
-    -- category
 );
 
 CREATE TABLE QuestionToCategory ( -- questions can have multiple categories
@@ -44,3 +42,34 @@ CREATE TABLE TestCase (
     PRIMARY KEY (test_case_id)
 );
 
+CREATE TABLE Exam {
+    exam_id INT UNIQUE NOT NULL AUTO_INCREMENT,
+    exam_title VARCHAR(255) NOT NULL,
+    PRIMARY KEY (exam_id)
+};
+
+CREATE TABLE ExamToQuestions {
+    exam_id INT NOT NULL,
+    question_id INT NOT NULL,
+    question_number INT NOT NULL,
+    question_max_value FLOAT NOT NULL,
+    FOREIGN KEY (exam_id) REFERENCES Exam(exam_id),
+    FOREIGN KEY (question_id) REFERENCES Questions(question_id),
+    PRIMARY KEY (exam_id, question_id)
+};
+
+CREATE TABLE Result {
+    result_id INT UNIQUE NOT NULL AUTO_INCREMENT,
+    exam_id INT NOT NULL,
+    student_id INT NOT NULL,
+    FOREIGN KEY (exam_id) REFERENCES Exam(exam_id),
+    FOREIGN KEY (student_id) REFERENCES User(user_id),
+    PRIMARY KEY (result_id, exam_id, student_id)
+};
+
+CREATE TABLE ResultToQuestions {
+    result_id INT NOT NULL,
+    question_id INT NOT NULL,
+    FOREIGN KEY (result_id) REFERENCES Result(result_id)
+    FOREIGN KEY (question_id) REFERENCES Question(question_id)
+}
