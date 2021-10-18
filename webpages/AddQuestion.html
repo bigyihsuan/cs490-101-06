@@ -1,55 +1,58 @@
 <!DOCTYPE html>
 <html>
-<head>
-	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
-	<link href="student.css" rel="stylesheet">
-	<title>AddQuestions Page</title>
-</head>
-<body>
-		<nav>
-			<ul>
-				<li>
-					<a href="Instructor.html">Home</a>
-				</li>
-				<li>
-					<a href="AddQuestion.html">Add Questions</a>
-				</li>
-				<li>
-					<a href="CreateExam.html">Create Exam</a>
-				</li>
-				<li>
-					<a href="AutoGradeExam.html">AutoGrade Exam</a>
-				</li>
-				<li>
-					<a href="ReviewExam.html">Review Exam</a>
-				</li>
-				<li>
-					<a href="ReleaseGrade.html">Release Grade</a>
-				</li>
-				<li>
-					<a class="active" href="login.html">Log Out</a>
-				</li>
-			</ul>
-			<div class="handle">
-				Menu
-			</div>
-		</nav>
-		<header id="aa">
-			<h1 style="text-align:center; color: #ebebeb;">Add Questions</h1>
-		</header>
 
-	<form action="AddQuestion.php" method="post">
-			<div id="aa">
-				<label class="desc" for="question" id="question" style="text-align:center;">Question Box</label>
-                <div>
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <link href="student.css" rel="stylesheet">
+    <title>AddQuestions Page</title>
+</head>
+
+<body>
+    <nav>
+        <ul>
+            <li>
+                <a href="Instructor.html">Home</a>
+            </li>
+            <li>
+                <a href="AddQuestion.html">Add Questions</a>
+            </li>
+            <li>
+                <a href="CreateExam.html">Create Exam</a>
+            </li>
+            <li>
+                <a href="AutoGradeExam.html">AutoGrade Exam</a>
+            </li>
+            <li>
+                <a href="ReviewExam.html">Review Exam</a>
+            </li>
+            <li>
+                <a href="ReleaseGrade.html">Release Grade</a>
+            </li>
+            <li>
+                <a class="active" href="login.html">Log Out</a>
+            </li>
+        </ul>
+        <div class="handle">
+            Menu
+        </div>
+    </nav>
+    <header id="aa">
+        <h1 style="text-align:center; color: #ebebeb;">Add Questions</h1>
+    </header>
+
+    <form action="AddQuestion.php" method="post">
+        <div id="aa">
+            <label class="desc" for="question" id="question" style="text-align:center;">Question Box</label>
+            <div>
                 <textarea id="question" name="question" spellcheck="true" style="width:90%;height:100px;" tabindex="1"></textarea>
-                </div>
-			</div><br>
-			<div id="aa">
-				<label class="desc" for="function_name" id="function_name">Function Name</label> <div><input class="field text fn" id="function_name" name="function_name" size="20" tabindex="2" type="text" value=""></div>
-			</div><br>
-			<div id="aa">
-				<label>Category<div><select name="type">
+            </div>
+        </div><br>
+        <div id="aa">
+            <label class="desc" for="function_name" id="function_name">Function Name</label>
+            <div><input class="field text fn" id="function_name" name="function_name" size="20" tabindex="2" type="text" value=""></div>
+        </div><br>
+        <div id="aa">
+            <label>Category<div><select name="type">
 					<option value="none">
 						None
 					</option>
@@ -69,10 +72,10 @@
 						Indexing
 					</option>
 				</select></div></label>
-			</div><br>
-			
-			<div id="aa">
-				<label id="aa">Difficulty Level <div><select name="difficulty">
+        </div><br>
+
+        <div id="aa">
+            <label id="aa">Difficulty Level <div><select name="difficulty">
 					<option value="Easy">
 						Easy
 					</option>
@@ -83,76 +86,64 @@
 						Hard
 					</option>
 				</select></div></label>
-			</div><br>
-			
-			<div id="aa">
-				<label class="desc" for="point_value" id="point_value">Points Worth</label><div> <input id="point_value" name="point_value" size="20" spellcheck="true" tabindex="3"></div>
-			</div><br>
+        </div><br>
 
-			
-    <br />
-    <div id="tags" class="container-fluid"></div>
-    <button type="button" class="btn btn-primary" onclick="addTag()">Add Test Cases</button>
-    <button type="button" class="btn btn-primary" onclick="removeAllTags()">Remove All Test Cases</button>
+        <div id="aa">
+            <label class="desc" for="point_value" id="point_value">Points Worth</label>
+            <div> <input id="point_value" name="point_value" size="20" spellcheck="true" tabindex="3"></div>
+        </div><br>
 
 
-	<div>
-		<button id="saveForm" name="saveForm" type="submit" value="Submit">Submit Question</button>
-	</div>
+        <br />
+        <button type="button" class="btn btn-primary" onclick="addTag()">Add Test Case</button>
+        <button type="button" class="btn btn-primary" onclick="removeAllTags()">Remove All Test Cases</button>
+        <div id="tags" class="container-fluid"></div>
+        <div>
+            <button id="saveForm" name="saveForm" type="submit" value="Submit">Submit Question</button>
+        </div>
 
 
-    <script>
-        function addTag(tag = '') {
-            var div = document.createElement('div');
-            var html = `
+        <script>
+            function addTag(tag = '') {
+                var div = document.createElement('div');
+                var html = `
             <div class="row align-middle border" style="padding:0.3em">
-                <div class="col-md-8">
-                    <div class="input-group">
-                        <input class="form-control" type="text" id="tagBox" placeholder="Input" value="${tag}" />
-						<input class="form-control" type="text" id="tagBoxresult" placeholder="Result" value="${tag}" />
-                        <span class="input-group-text">
-                            <div id="counter${$('#tags').children().length}">0</div>
-                            /
-                            <div id="maxCounter${$('#tags').children().length}">0</div>
-                        </span>
-                    </div>
-                </div>
-                <div class="btn-group col-md-4" role="group" aria-label="Tag Buttons">
-                    
-                    <button type="button" class="btn btn-secondary" title="Delete" onclick="removeTag(this)">&#10060;</button>
-                   
-                </div>
+				<div class="input-group">
+					<input class="form-control" type="text" id="tagBox" placeholder="Input" value="${tag}" />
+					<input class="form-control" type="text" id="tagBoxresult" placeholder="Result" value="${tag}" />
+					<button type="button" class="btn btn-secondary" title="Delete" onclick="removeTag(this)">&#10060;</button>
+				</div>
             </div>`;
-            // <!-- <input class="form-control" type="number" id="counter" min="0" value="0" /> -->
+                // <!-- <input class="form-control" type="number" id="counter" min="0" value="0" /> -->
 
-            div.class = "container-fluid";
-            div.innerHTML = html;
-            $('#tags').append(div);
-            div.id = "row" + $('#tags').children().length;
-            return $('#tags').children().length;
-        }
+                div.class = "container-fluid";
+                div.innerHTML = html;
+                $('#tags').append(div);
+                div.id = "row" + $('#tags').children().length;
+                return $('#tags').children().length;
+            }
 
-        function removeAllTags() {
-            $('#tags').empty();
-        }
+            function removeAllTags() {
+                $('#tags').empty();
+            }
 
-        function removeTag(ele) {
-            $(ele).parents("[id^=row]").empty();
-        }
+            function removeTag(ele) {
+                $(ele).parents("[id^=row]").empty();
+            }
 
-        function parseTags() {
-            text = $('#tagImportBox').val();
-            tags = text.split(',').map(s => s.trim());
-            tags.forEach(t => addTag(t));
-        }
-       
-    </script>
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+            function parseTags() {
+                text = $('#tagImportBox').val();
+                tags = text.split(',').map(s => s.trim());
+                tags.forEach(t => addTag(t));
+            }
+        </script>
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 
 
-	</form>
-	
+    </form>
+
 </body>
+
 </html>
