@@ -15,7 +15,3 @@ VALUES
     ('alice', '$2y$10$GcYoSoEPr0q618Vt/xSztu6B.EZyWkzlE3DEhMKjaE2mY6ifWgDx.', 'ADMIN'),
     ('ernie', '$2y$10$ywz.PpNarifLeq3BFaqhYuXBJiP9Htw.JFudHHxPKU54X5MTHrtLC', 'USER');
 -- VALUES ('bob', 'are', 'USER'), ('doug', 'an', 'USER'), ('charlie', 'idiot', 'USER'), ('alice', 'you', 'ADMIN'), ('ernie', 'haha', 'USER');
-
-
--- mysql -h us-cdbr-east-04.cleardb.com -u b9960caeae98e0 -p5ee5fe3e
--- heroku_454624e55acb805
