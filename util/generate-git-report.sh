@@ -11,7 +11,7 @@ for author in "${authors[@]}"; do
     rm "$1/$author.txt"
     echo "$1/$author.txt removed"
     commits=$(git log --author="$author" | grep ^commit | awk -F ' ' '{print $2}')
-    for commit in ${commits[@]}; do
+    for commit in "${commits[@]}"; do
         echo "$author $commit"
         git show "$commit" >>"$1/$author.txt"
     done

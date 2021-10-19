@@ -73,50 +73,50 @@
     </div>
 
 
-		
-	 <form action="<?=$_SERVER['PHP_SELF'];?>" method="post">
-		<table>
-				<tr>
-					<td style="width:50%;background:#ededed;padding-left:10px;padding-right:10px;padding-top:35px;" valign="top">
-			<div>
-				
-				<div>
-					<p style="color: #130202;">Filter questions by difficulty:</p>
-					<button id="pick" name="pick" type="submit" value="Easy" style="margin-bottom:20px;">Easy</button>
-					<button id="pick" name="pick" type="submit" value="Medium" style="margin-bottom:20px;">Medium</button>
-					<button id="pick" name="pick" type="submit" value="Hard" style="margin-bottom:20px;">Hard</button>
-				</div>
-				
-				<div>
-					<p style="color: #240303;">Filter questions by category:</p>
-					<button id="pick" name="pick" type="submit" value="recursion" style="margin-bottom:4px;">Recursion</button>
-					<button id="pick" name="pick" type="submit" value="forloop" style="margin-bottom:4px;">For Loop</button>
-					<button id="pick" name="pick" type="submit" value="whileloop" style="margin-bottom:4px;">While Loop</button>
-					<button id="pick" name="pick" type="submit" value="conditional" style="margin-bottom:20px;">Conditional</button>
-					<button id="pick" name="pick" type="submit" value="indexing" style="margin-bottom:20px;">Indexing</button>
-				</div>
-				<br>
-				<div>
-					<p></p>
-					<button id="pick" name="pick" type="submit" value="all" style="margin-bottom:20px;">Make Question For Exam</button>
-				</div>
-			</div>
-	
-	 </form>
-	 <div id="aa" style="background:#ededed;width:90%;margin:0 auto;margin-top:30px;margin-bottom:50px;text-align:left;">
-		<?php include("LoadQuestions.php"); ?>
-	</div>
 
-	<td style="width:50%;padding-left:5%;padding-right:5%;padding-top:35px;background:#ededed;" valign="top">
-		<p>Selected questions:</p>
-			<form action="SubmitPoints.php" id="testtime" method="post" name="testtime">
-					<?php include("GetQuestions.php"); ?>
-			</form>
-	</td>
-	</tr>
-	</table>
-	
-	
+    <form action="<?=$_SERVER['PHP_SELF'];?>" method="post">
+        <table>
+            <tr>
+                <td style="width:50%;background:#ededed;padding-left:10px;padding-right:10px;padding-top:35px;" valign="top">
+                    <div>
+
+                        <div>
+                            <p style="color: #130202;">Filter questions by difficulty:</p>
+                            <button id="pick" name="pick" type="submit" value="Easy" style="margin-bottom:20px;">Easy</button>
+                            <button id="pick" name="pick" type="submit" value="Medium" style="margin-bottom:20px;">Medium</button>
+                            <button id="pick" name="pick" type="submit" value="Hard" style="margin-bottom:20px;">Hard</button>
+                        </div>
+
+                        <div>
+                            <p style="color: #240303;">Filter questions by category:</p>
+                            <button id="pick" name="pick" type="submit" value="recursion" style="margin-bottom:4px;">Recursion</button>
+                            <button id="pick" name="pick" type="submit" value="forloop" style="margin-bottom:4px;">For Loop</button>
+                            <button id="pick" name="pick" type="submit" value="whileloop" style="margin-bottom:4px;">While Loop</button>
+                            <button id="pick" name="pick" type="submit" value="conditional" style="margin-bottom:20px;">Conditional</button>
+                            <button id="pick" name="pick" type="submit" value="indexing" style="margin-bottom:20px;">Indexing</button>
+                        </div>
+                        <br>
+                        <div>
+                            <p></p>
+                            <button id="pick" name="pick" type="submit" value="all" style="margin-bottom:20px;">Make Question For Exam</button>
+                        </div>
+                    </div>
+
+    </form>
+    <div id="aa" style="background:#ededed;width:90%;margin:0 auto;margin-top:30px;margin-bottom:50px;text-align:left;">
+        <?php include("LoadQuestions.php"); ?>
+    </div>
+
+    <td style="width:50%;padding-left:5%;padding-right:5%;padding-top:35px;background:#ededed;" valign="top">
+        <p>Selected questions:</p>
+        <form action="SubmitPoints.php" id="testtime" method="post" name="testtime">
+            <?php include("GetQuestions.php"); ?>
+        </form>
+    </td>
+    </tr>
+    </table>
+
+
 </body>
 
 </html>
