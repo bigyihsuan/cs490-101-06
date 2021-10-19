@@ -116,8 +116,8 @@
         var html = `
 	<div class="row align-middle border" style="padding:0.3em">
 		<div class="input-group">
-			<input type="text" id="row${$('#testCases').children().length}Input" placeholder="Input" value="${tag}" />
-			<input type="text" id="row${$('#testCases').children().length}Result" placeholder="Result" value="${tag}" />
+			<input type="text" id="row${$('#testCases').children().length}Input" placeholder="Input" />
+			<input type="text" id="row${$('#testCases').children().length}Output" placeholder="Result" />
 			<button type="button" class="btn btn-secondary" title="Delete" onclick="removeTag(this)">&#10060;</button>
 		</div>
 	</div>`;
@@ -140,13 +140,21 @@
 
     $("#questionForm").on("submit", function(e) {
         e.preventDefault();
-        console.log($(this).serializeArray())
-            // $('#testCases').children().toArray().forEach(element => {
-            //     element.children[0].children.forEach(child => {
-            //         console.log(child);
-            //     });
-            // });
-        $.post("../backend/add_question.php", $(this).serializeArray());
+        var data = $(this).serializeArray();
+        for (var i = 0; i < $("#testCases").children().length; i++) {
+            var input = "row".concat(i, "Input");
+            var output = "row".concat(i, "Output");
+            data.push({
+                "name": "test_cases_" + i,
+                "value": JSON.stringify({
+                    [input]: $(`#${input}`).val(),
+                    [output]: $(`#${output}`).val(),
+                })
+            });
+        }
+        data.push(testCases);
+        console.log(data);
+        $.post("../backend/add_question.php", data);
     });
 </script>
 

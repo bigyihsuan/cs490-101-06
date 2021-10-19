@@ -4,10 +4,19 @@
 
 session_start();
 
-echo "<p>Hello world!</p>";
+error_log(print_r($_POST, true));
 
-foreach (array_keys($_POST) as $key) {
-    print "<p>$key $_POST[$key]</p>";
+// foreach (array_keys($_POST) as $key) {
+//     error_log(print_r($key, true));
+//     error_log(print_r($_POST[$key], true));
+// }
+
+foreach ($_POST as $key => $value) {
+    error_log("$key => $value");
+    if (strpos($key, "test_cases") !== false) {
+        $case = json_decode($value);
+        foreach ($case as $key => $value) {
+            error_log("$key => $value");
+        }
+    }
 }
-
-header("status:303 href='backend/add_question.php'");
