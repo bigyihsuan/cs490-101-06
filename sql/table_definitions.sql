@@ -8,23 +8,11 @@ CREATE TABLE User (
 
 CREATE TABLE Question (
     question_id INT UNIQUE NOT NULL AUTO_INCREMENT,
-    question_text VARCHAR(255) NOT NULL,
-    difficulty ENUM('EASY', 'MEDIUM', 'HARD') NOT NULL,
+    question_text TEXT NOT NULL,
+    function_name VARCHAR(255) NOT NULL,
+    difficulty ENUM('Easy', 'Medium', 'Hard') NOT NULL,
+    category ENUM('none', 'recursion', 'forloop', 'whileloop', 'conditional', 'indexing') NOT NULL,
     PRIMARY KEY (question_id)
-);
-
-CREATE TABLE QuestionToCategory ( -- questions can have multiple categories
-    question_id INT NOT NULL,
-    category_id INT NOT NULL,
-    FOREIGN KEY (question_id) REFERENCES Questions(question_id),
-    FOREIGN KEY (category) REFERENCES Category(category_id),
-    PRIMARY KEY (question_id, category_id)
-);
-
-CREATE TABLE Category (
-    category_id INT UNIQUE NOT NULL AUTO_INCREMENT,
-    category_type VARCHAR(255) NOT NULL,
-    PRIMARY KEY (category_id)
 );
 
 CREATE TABLE QuestionToTestCase ( -- questions can have multiple test cases
