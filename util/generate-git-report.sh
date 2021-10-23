@@ -8,11 +8,7 @@
 authors=("Nova" "bigyihsuan" "pbp38")
 for author in "${authors[@]}"; do
     echo "$author"
-    rm "$1/$author.txt"
-    echo "$1/$author.txt removed"
-    commits=$(git log --author="$author" | grep ^commit | awk -F ' ' '{print $2}')
-    for commit in "${commits[@]}"; do
-        echo "$author $commit"
-        git show "$commit" >>"$1/$author.txt"
-    done
+    rm "$author.txt"
+    echo "$author.txt removed"
+    git show $(git log --author="$author" | grep ^commit | awk -F ' ' '{print $2}') >"$author.txt"
 done

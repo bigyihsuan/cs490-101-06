@@ -1,63 +1,53 @@
+-- hold a user, be it student or teacher
 CREATE TABLE User (
-    user_id INT UNIQUE NOT NULL AUTO_INCREMENT,
+    id INT UNIQUE NOT NULL AUTO_INCREMENT,
     username VARCHAR(255) NOT NULL,
     pass VARCHAR(255) NOT NULL, 
     access ENUM('TEACHER', 'STUDENT') NOT NULL,
-    PRIMARY KEY (user_id)
+    PRIMARY KEY (id)
 );
-
+-- a question in an exam
 CREATE TABLE Question (
-    question_id INT UNIQUE NOT NULL AUTO_INCREMENT,
-    question_text TEXT NOT NULL,
-    function_name VARCHAR(255) NOT NULL,
+    id INT UNIQUE NOT NULL AUTO_INCREMENT,
+    prompt TEXT NOT NULL,
+    solution TEXT NOT NULL,
     difficulty ENUM('Easy', 'Medium', 'Hard') NOT NULL,
     category ENUM('none', 'recursion', 'forloop', 'whileloop', 'conditional', 'indexing') NOT NULL,
-    PRIMARY KEY (question_id)
+    PRIMARY KEY (id)
 );
-
-CREATE TABLE QuestionToTestCase ( -- questions can have multiple test cases
-    question_id INT NOT NULL,
-    test_case_id INT NOT NULL,
-    FOREIGN KEY (question_id) REFERENCES Questions(question_id),
-    FOREIGN KEY (test_case_id) REFERENCES TestCase(test_case_id),
-    PRIMARY KEY (question_id, test_case_id)
-);
-
+-- a test case for a question
 CREATE TABLE TestCase (
-    test_case_id INT UNIQUE NOT NULL AUTO_INCREMENT,
-    test_input VARCHAR(255), -- can be empty for no args
-    test_output VARCHAR(255) NOT NULL, -- must have some sort of output
-    PRIMARY KEY (test_case_id)
+    id INT UNIQUE NOT NULL AUTO_INCREMENT,
+    question INT NOT NULL,
+    input VARCHAR(255),
+    output VARCHAR(255),
+    PRIMARY KEY (id),
+    FOREIGN KEY (question) REFERENCES Question(id)
 );
-
-CREATE TABLE Exam {
-    exam_id INT UNIQUE NOT NULL AUTO_INCREMENT,
-    exam_title VARCHAR(255) NOT NULL,
-    PRIMARY KEY (exam_id)
-};
-
-CREATE TABLE ExamToQuestions {
-    exam_id INT NOT NULL,
-    question_id INT NOT NULL,
-    question_number INT NOT NULL,
-    question_max_value FLOAT NOT NULL,
-    FOREIGN KEY (exam_id) REFERENCES Exam(exam_id),
-    FOREIGN KEY (question_id) REFERENCES Questions(question_id),
-    PRIMARY KEY (exam_id, question_id)
-};
-
-CREATE TABLE Result {
-    result_id INT UNIQUE NOT NULL AUTO_INCREMENT,
-    exam_id INT NOT NULL,
-    student_id INT NOT NULL,
-    FOREIGN KEY (exam_id) REFERENCES Exam(exam_id),
-    FOREIGN KEY (student_id) REFERENCES User(user_id),
-    PRIMARY KEY (result_id, exam_id, student_id)
-};
-
-CREATE TABLE ResultToQuestions {
-    result_id INT NOT NULL,
-    question_id INT NOT NULL,
-    FOREIGN KEY (result_id) REFERENCES Result(result_id)
-    FOREIGN KEY (question_id) REFERENCES Question(question_id)
-}
+-- an exam
+CREATE TABLE Exam (
+    id INT UNIQUE NOT NULL AUTO_INCREMENT,
+    title VARCHAR(255) NOT NULL,
+    PRIMARY KEY (id)
+);
+-- a question in an exam
+CREATE TABLE ExamQuestion (
+    id INT UNIQUE NOT NULL AUTO_INCREMENT,
+    exam INT NOT NULL,
+    question INT NOT NULL,
+    max_score INT NOT NULL, 
+    FOREIGN KEY (exam) REFERENCES Exam(id),
+    FOREIGN KEY (question) REFERENCES Question(id),
+    PRIMARY KEY (id, exam, question)
+);
+-- a student's result of taking an exam
+CREATE TABLE Result (
+    id INT NOT NULL UNIQUE AUTO_INCREMENT,
+    student INT NOT NULL,
+    exam_question INT NOT NULL,
+    score INT NOT NULL,
+    comment TEXT,
+    FOREIGN KEY (student) REFERENCES User(id),
+    FOREIGN KEY (exam_question) REFERENCES ExamQuestion(id),
+    PRIMARY KEY (id, student, exam_question)
+);
