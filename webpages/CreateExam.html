@@ -4,6 +4,8 @@
 <head>
     <link href="student.css" rel="stylesheet">
     <title>CreateExam Page</title>
+
+    <script src="./question_bank.js"></script>
 </head>
 
 <body>
@@ -111,11 +113,7 @@
     </form>
     <div id="question_bank" style="width:100%;margin:0 auto;margin-top:30px;margin-bottom:50px;text-align:left;">
         <script>
-            $('document').ready(function() {
-                $.post("./question_bank.php", function(data) {
-                    $('#question_bank').append(data);
-                });
-            });
+            getQuestionBank("question_bank");
         </script>
     </div>
 
