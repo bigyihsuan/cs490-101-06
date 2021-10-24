@@ -97,14 +97,20 @@
                         </div>
                         <br>
                         <div>
+                            <label class="desc" id="setpoints" style="color: black;">Set Points</label>
+                            <div>
+                                <input class="text" id="setpoints" name="setpoints" size="20" type="text" >
+                            </div>
+                        </div><br>
+                        <div>
                             <p></p>
                             <button id="pick" name="pick" type="submit" value="all" style="margin-bottom:20px;">Make Question For Exam</button>
                         </div>
                     </div>
 
     </form>
-    <div id="aa" style="width:90%;margin:0 auto;margin-top:30px;margin-bottom:50px;text-align:left;">
-        <?php include("LoadQuestions.php"); ?>
+    <div id="aa" style="width:100%;margin:0 auto;margin-top:30px;margin-bottom:50px;text-align:left;">
+        <?php include("QuestionBank.php"); ?>
     </div>
 
     <td style="width:50%;padding-left:5%;padding-right:5%;padding-top:35px;background:#ededed;" valign="top">
