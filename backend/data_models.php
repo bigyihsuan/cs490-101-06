@@ -18,3 +18,29 @@ class User
         $this->access = $access;
     }
 }
+
+class Question
+{
+    public string $prompt;
+    public string $type;
+    public string $difficulty;
+
+    public function __construct(string $prompt, string $type, string $difficulty)
+    {
+        $this->prompt = $prompt;
+        $this->type = $type;
+        $this->difficulty = $difficulty;
+    }
+}
+
+class TestCase
+{
+    public string $in;
+    public string $out;
+
+    public function __construct(string $in, string $out)
+    {
+        $this->in = $in;
+        $this->out = $out;
+    }
+}

@@ -44,9 +44,9 @@
         <h1 style="text-align:center; color: #ebebeb;">Add Questions</h1>
     </header>
     <table>
-     <tr>
-        <td style="width:50%;padding-left:10px;padding-right:10px;padding-top:35px;" valign="top">
-            
+        <tr>
+            <td style="width:50%;padding-left:10px;padding-right:10px;padding-top:35px;" valign="top">
+
                 <form id="questionForm" action="<?=$_SERVER['PHP_SELF'];?>" method="post">
                     <div id="aa">
                         <label class="desc" for="question" id="question" style="text-align:center;">Question Box</label>
@@ -79,13 +79,13 @@
                                     Indexing
                                 </option>
                             </select></div></label>
-                        <br><br>
+                        <!-- <br><br>
                         <label class="desc" for="solution" id="solution" style="text-align:center;">Intended Solution</label>
                         <div>
                             <textarea id="solution" name="solution" spellcheck="true" style="width:90%;height:100px;" tabindex="1"></textarea>
-                        </div>
+                        </div> -->
                     </div><br>
-            
+
                     <div id="aa">
                         <label id="aa">Difficulty Level <div><select name="difficulty">
                                 <option value="Easy">
@@ -99,34 +99,40 @@
                                 </option>
                             </select></div></label>
                     </div><br>
-            
-                 
-            
-            
+
+
+
+
                     <br />
                     <div>
                         <button type="button" class="btn btn-primary" onclick="addTag()">Add Test Case</button>
                         <button type="button" class="btn btn-primary" onclick="removeAllTags()">Remove All Test Cases</button>
                         <button id="saveForm" name="saveForm" type="submit" class="btn btn-primary">Submit Question</button>
                     </div>
-            
+
                     <div id="testCases" class="container-fluid"></div>
                 </form>
-           
 
 
-        </td>
 
-        <td style="width:50%;padding-left:10px;padding-right:10px;padding-top:35px;" valign="top">
-            <p style="color: #ebebeb;">Selected questions</p>
-            <div id="aa" style="width:90%;margin:0 auto;margin-top:30px;margin-bottom:50px;text-align:left;">
-                <?php include("LoadQuestions.php"); ?>
-            </div>
-        </td>
+            </td>
 
- </tr>
-</table>
-<!--
+            <td style="width:50%;padding-left:10px;padding-right:10px;padding-top:35px;" valign="top">
+                <p style="color: #ebebeb;">Selected questions</p>
+                <div id="aa" style="width:90%;margin:0 auto;margin-top:30px;margin-bottom:50px;text-align:left;">
+                    <script>
+                        $('document').ready(function() {
+                            $.post("../backend/get_question.php", function(data) {
+                                console.log(data);
+                            });
+                        });
+                    </script>
+                </div>
+            </td>
+
+        </tr>
+    </table>
+    <!--
     <form id="questionForm" action="<?=$_SERVER['PHP_SELF'];?>" method="post">
         <div id="aa">
             <label class="desc" for="question" id="question" style="text-align:center;">Question Box</label>
@@ -239,6 +245,9 @@
         data.push(testCases);
         console.log(data);
         $.post("../backend/add_question.php", data);
+        $.post("../backend/get_question.php", function(data) {
+            console.log(data);
+        });
     });
 </script>
 

@@ -10,7 +10,6 @@ CREATE TABLE User (
 CREATE TABLE Question (
     id INT UNIQUE NOT NULL AUTO_INCREMENT,
     prompt TEXT NOT NULL,
-    solution TEXT NOT NULL,
     difficulty ENUM('Easy', 'Medium', 'Hard') NOT NULL,
     category ENUM('none', 'recursion', 'forloop', 'whileloop', 'conditional', 'indexing') NOT NULL,
     PRIMARY KEY (id)
