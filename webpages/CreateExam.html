@@ -74,7 +74,7 @@
 
 
 
-    <form id = "createexam" action="<?=$_SERVER['PHP_SELF'];?>" method="post">
+    <form id="createexam" action="<?=$_SERVER['PHP_SELF'];?>" method="post">
         <table>
             <tr>
                 <td style="width:50%;background:#ededed;padding-left:10px;padding-right:10px;padding-top:35px;" valign="top">
@@ -99,7 +99,7 @@
                         <div>
                             <label class="desc" id="setpoints" style="color: black;">Set Points</label>
                             <div>
-                                <input class="text" id="setpoints" name="setpoints" size="20" type="text" >
+                                <input class="text" id="setpoints" name="setpoints" size="20" type="text">
                             </div>
                         </div><br>
                         <div>
@@ -109,8 +109,14 @@
                     </div>
 
     </form>
-    <div id="aa" style="width:100%;margin:0 auto;margin-top:30px;margin-bottom:50px;text-align:left;">
-        <?php include("QuestionBank.php"); ?>
+    <div id="question_bank" style="width:100%;margin:0 auto;margin-top:30px;margin-bottom:50px;text-align:left;">
+        <script>
+            $('document').ready(function() {
+                $.post("./question_bank.php", function(data) {
+                    $('#question_bank').append(data);
+                });
+            });
+        </script>
     </div>
 
     <td style="width:50%;padding-left:5%;padding-right:5%;padding-top:35px;background:#ededed;" valign="top">
