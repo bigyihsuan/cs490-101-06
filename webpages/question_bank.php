@@ -4,7 +4,25 @@ include("../account.php");
 // include("../data_models.php");
 global $db;
 
-$query = "SELECT * FROM `Question`;";
+$query = "SELECT * FROM `Question`";
+
+if ($_POST['category'] != "") {
+    $category = $_POST['category'];
+}
+if ($_POST['difficulty'] != "") {
+    $difficulty = $_POST['difficulty'];
+}
+
+if (isset($category) && isset($difficulty)) {
+    $query .= " WHERE `category`=$category && `difficulty`=$difficulty";
+} else if (isset($category)) {
+    $query .= " WHERE `category`=$category";
+} else if (isset($difficulty)) {
+    $query .= " WHERE `difficulty`=$difficulty";
+}
+
+$query .= ";";
+
 ($result = $db->query($query)) or die();
 $html = '
 <table align="center" border="1px" style="width: 600px; line-height: 40px;">
