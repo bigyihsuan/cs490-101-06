@@ -17,11 +17,9 @@ CREATE TABLE Question (
 -- a test case for a question
 CREATE TABLE TestCase (
     id INT UNIQUE NOT NULL AUTO_INCREMENT,
-    question INT NOT NULL,
     input VARCHAR(255),
     output VARCHAR(255),
-    PRIMARY KEY (id),
-    FOREIGN KEY (question) REFERENCES Question(id)
+    PRIMARY KEY (id)
 );
 -- an exam
 CREATE TABLE Exam (
@@ -49,4 +47,13 @@ CREATE TABLE Result (
     FOREIGN KEY (student) REFERENCES User(id),
     FOREIGN KEY (exam_question) REFERENCES ExamQuestion(id),
     PRIMARY KEY (id, student, exam_question)
+);
+
+-- JOINER TABLES
+CREATE TABLE QuestionTestCase (
+    question INT NOT NULL,
+    test_case INT NOT NULL,
+    FOREIGN KEY (question) REFERENCES Question(id),
+    FOREIGN KEY (test_case) REFERENCES TestCase(id),
+    PRIMARY KEY (question, test_case)
 );

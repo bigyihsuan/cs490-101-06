@@ -4,9 +4,6 @@ include("../account.php");
 include("./data_models.php");
 global $db;
 
-use Question;
-use TestCase;
-
 error_log(print_r("{$_POST['question']}, {$_POST['type']}, {$_POST['difficulty']}", true));
 
 $question = new Question(
@@ -37,10 +34,19 @@ $question_insertion =
 $db->query($question_insertion);
 
 $question_id = $db->insert_id;
-$insert_testcases =
-    "INSERT INTO `TestCase` (`question`, `input`, `output`) VALUES";
+$testcase_ids = array();
 foreach ($test_cases as $case) {
-    $insert_testcases .= "({$question_id}, \"{$case->in}\", \"{$case->out}\"),";
+    $insert_testcases =
+        "INSERT INTO `TestCase` (`input`, `output`) VALUES ";
+    $insert_testcases .= "(\"{$case->in}\", \"{$case->out}\"),";
+    $insert_testcases = substr($insert_testcases, 0, strlen($insert_testcases) - 1) . ";";
+    $db->query($insert_testcases);
+    $testcase_ids[] = $db->insert_id;
 }
-$insert_testcases = substr($insert_testcases, 0, strlen($insert_testcases) - 1) . ";";
-$db->query($insert_testcases);
+
+$link_question_to_testcases = "INSERT INTO `QuestionTestCase` (`question`, `test_case`) VALUES ";
+foreach ($testcase_ids as $testcase_id) {
+    $link_question_to_testcases .= "($question_id, $testcase_id),";
+}
+$link_question_to_testcases = substr($link_question_to_testcases, 0, strlen($link_question_to_testcases) - 1) . ";";
+$db->query($link_question_to_testcases);

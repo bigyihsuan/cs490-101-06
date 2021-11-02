@@ -14,11 +14,11 @@ if ($_POST['difficulty'] != "") {
 }
 
 if (isset($category) && isset($difficulty)) {
-    $query .= " WHERE `category`=$category && `difficulty`=$difficulty";
+    $query .= " WHERE `category`=\"$category\" && `difficulty`=\"$difficulty\"";
 } else if (isset($category)) {
-    $query .= " WHERE `category`=$category";
+    $query .= " WHERE `category`=\"$category\"";
 } else if (isset($difficulty)) {
-    $query .= " WHERE `difficulty`=$difficulty";
+    $query .= " WHERE `difficulty`=\"$difficulty\"";
 }
 
 $query .= ";";
