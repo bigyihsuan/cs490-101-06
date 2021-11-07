@@ -33,8 +33,8 @@ CREATE TABLE ExamQuestion (
     exam INT NOT NULL,
     question INT NOT NULL,
     max_score INT NOT NULL, 
-    FOREIGN KEY (exam) REFERENCES Exam(id),
-    FOREIGN KEY (question) REFERENCES Question(id),
+    CONSTRAINT examquestion_exam_fk FOREIGN KEY (exam) REFERENCES Exam(id) ON DELETE CASCADE,
+    CONSTRAINT examquestion_question_fk FOREIGN KEY (question) REFERENCES Question(id) ON DELETE CASCADE,
     PRIMARY KEY (id, exam, question)
 );
 -- a student's result of taking an exam
@@ -44,8 +44,8 @@ CREATE TABLE Result (
     exam_question INT NOT NULL,
     score INT NOT NULL,
     comment TEXT,
-    FOREIGN KEY (student) REFERENCES User(id),
-    FOREIGN KEY (exam_question) REFERENCES ExamQuestion(id),
+    CONSTRAINT result_student_fk FOREIGN KEY (student) REFERENCES User(id) ON DELETE CASCADE,
+    CONSTRAINT result_examquestion_fk FOREIGN KEY (exam_question) REFERENCES ExamQuestion(id) ON DELETE CASCADE,
     PRIMARY KEY (id, student, exam_question)
 );
 
@@ -53,7 +53,7 @@ CREATE TABLE Result (
 CREATE TABLE QuestionTestCase (
     question INT NOT NULL,
     test_case INT NOT NULL,
-    FOREIGN KEY (question) REFERENCES Question(id),
-    FOREIGN KEY (test_case) REFERENCES TestCase(id),
+    CONSTRAINT questiontestcase_question_fk FOREIGN KEY (question) REFERENCES Question(id) ON DELETE CASCADE,
+    CONSTRAINT questiontestcase_testcase_fk FOREIGN KEY (test_case) REFERENCES TestCase(id) ON DELETE CASCADE,
     PRIMARY KEY (question, test_case)
 );
