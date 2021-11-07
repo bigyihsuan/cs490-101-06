@@ -22,14 +22,19 @@ class User
 class Question
 {
     public string $prompt;
-    public string $type;
+    public string $category;
+    public int $category_id;
     public string $difficulty;
+    public int $difficulty_id;
+    public $constraint;
+    public int $constraint_id;
 
-    public function __construct(string $prompt, string $type, string $difficulty)
+    public function __construct(string $prompt, string $category, string $difficulty, $constraint)
     {
         $this->prompt = $prompt;
-        $this->type = $type;
+        $this->category = $category;
         $this->difficulty = $difficulty;
+        $this->constraint = $constraint;
     }
 }
 

@@ -1,16 +1,18 @@
 <?php
-
 include("../account.php");
 include("./data_models.php");
 global $db;
 
-error_log(print_r("{$_POST['question']}, {$_POST['type']}, {$_POST['difficulty']}", true));
+// error_log(print_r("{$_POST['question']}, {$_POST['category']}, {$_POST['difficulty']}, {$_POST['useConstraint']}, {$_POST['constraint']}", true));
 
 $question = new Question(
-    $_POST['question'],
-    $_POST['type'],
-    $_POST['difficulty']
+    $db->escape_string($_POST['question']),
+    $db->escape_string($_POST['category']),
+    $db->escape_string($_POST['difficulty']),
+    isset($_POST['useConstraint']) ? $db->escape_string($_POST['constraint']) : ""
 );
+
+// error_log(print_r("{$_POST['question']}, {$_POST['category']}, {$_POST['difficulty']}, {$_POST['useConstraint']}, {$_POST['constraint']}", true));
 
 $test_cases = array();
 
@@ -18,19 +20,43 @@ foreach ($_POST as $key => $value) {
     if (strpos($key, "test_cases") !== false) {
         $case = json_decode($value);
         foreach ($case as $in => $out) {
-            $test_case = new TestCase($in, $out);
+            $test_case = new TestCase($db->escape_string($in), $db->escape_string($out));
             $test_cases[] = $test_case;
         }
     }
 }
 
-foreach ($test_cases as $case) {
-    error_log(print_r("{$case->in} {$case->out}\n", true));
+// foreach ($test_cases as $case) {
+//     error_log(print_r("{$case->in} {$case->out}\n", true));
+// }
+
+($result1 = $db->query("SELECT * FROM `DifficultyTypes` ORDER BY id;")) or die();
+$difficulties = $result1->fetch_all(MYSQLI_ASSOC);
+$ind = array_search($question->difficulty, array_column($difficulties, 'difficulty'));
+$question->difficulty_id = $difficulties[$ind]['id'];
+// error_log(print_r($question->difficulty_id, true));
+
+($result2 = $db->query("SELECT * FROM `CategoryTypes` ORDER BY id;")) or die();
+$categories = $result2->fetch_all(MYSQLI_ASSOC);
+$ind = array_search($question->category, array_column($categories, 'category'));
+$question->category_id = $categories[$ind]['id'];
+// error_log(print_r($question->category_id, true));
+
+if (strcmp($question->constraint, "") !== 0) {
+    ($result3 = $db->query("SELECT * FROM `ConsTypes` ORDER BY id;")) or die();
+    $constraints = $result3->fetch_all(MYSQLI_ASSOC);
+    $ind = array_search($question->constraint, array_column($constraints, 'cons'));
+    $question->constraint_id = $categories[$ind]['id'];
+} else {
+    $question->constraint_id = 0;
 }
+// error_log(print_r($question->constraint_id, true));
+// error_log(print_r("{$_POST['question']}, {$_POST['category']}, {$_POST['difficulty']}, {$_POST['useConstraint']}, {$_POST['constraint']}", true));
 
 $question_insertion =
-    "INSERT INTO `Question` (prompt, difficulty, category)
-    VALUES (\"{$question->prompt}\", \"{$question->difficulty}\", \"{$question->type}\");";
+    "INSERT INTO `Question` (`prompt`, `difficulty`, `category`, `cons`)
+    VALUES (\"{$question->prompt}\", {$question->difficulty_id}, {$question->category_id}, {$question->constraint_id});";
+error_log(print_r("[AAAA] $question_insertion", true));
 $db->query($question_insertion);
 
 $question_id = $db->insert_id;

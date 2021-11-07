@@ -48,7 +48,7 @@
         <tr>
             <td style="width:30%;padding-left:10px;padding-right:10px;padding-top:35px;" valign="top">
 
-                <form id="questionForm" action="<?=$_SERVER['PHP_SELF'];?>" method="post">
+                <form id="questionForm" action="<php?=$_SERVER['PHP_SELF'];?>" method="post">
                     <div id="aa">
                         <label class="desc" for="question" id="question" style="text-align:center;">Question Box</label>
                         <div>
@@ -61,41 +61,32 @@
                         <div><input class="field text fn" id="function_name" name="function_name" size="20" tabindex="2" type="text" value=""></div>
                     </div><br>
                     -->
-                    <div id="aa">
-                        <label>Category<div><select name="type">
-                                <option value="none">
-                                    None
-                                </option>
-                                <option value="recursion">
-                                    Recursion
-                                </option>
-                                <option value="forloop">
-                                    For Loop
-                                </option>
-                                <option value="whileloop">
-                                    While Loop
-                                </option>
-                                <option value="conditional">
-                                    Conditional
-                                </option>
-                                <option value="indexing">
-                                    Indexing
-                                </option>
-                            </select></div></label>
+                    <div id="questionCategory">
+                        <script>
+                            getCategories("questionCategory");
+                        </script>
                     </div><br>
 
-                    <div id="aa">
-                        <label id="aa">Difficulty Level <div><select name="difficulty">
-                                <option value="Easy">
-                                    Easy
-                                </option>
-                                <option value="Medium">
-                                    Medium
-                                </option>
-                                <option value="Hard">
-                                    Hard
-                                </option>
-                            </select></div></label>
+                    <div id="questionDifficulty">
+                        <script>
+                            getDifficulties("questionDifficulty");
+                        </script>
+                    </div><br>
+
+                    <div id="questionConstraint">
+                        <table>
+                            <tr>
+                                <td>
+                                    <input type="checkbox" name="useConstraint" id="useConstraint">
+                                    <label for="useConstraint">Use Constraint?</label>
+                                </td>
+                                <td>
+                                    <script>
+                                        getConstraints("questionConstraint");
+                                    </script>
+                                </td>
+                            </tr>
+                        </table>
                     </div><br>
 
 
@@ -172,6 +163,7 @@
         data.push(testCases);
         console.log(data);
         $.post("../backend/add_question.php", data);
+        getQuestionBank("question_bank");
     });
 </script>
 

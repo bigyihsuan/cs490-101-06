@@ -10,8 +10,12 @@ CREATE TABLE User (
 CREATE TABLE Question (
     id INT UNIQUE NOT NULL AUTO_INCREMENT,
     prompt TEXT NOT NULL,
-    difficulty ENUM('Easy', 'Medium', 'Hard') NOT NULL,
-    category ENUM('none', 'recursion', 'forloop', 'whileloop', 'conditional', 'indexing') NOT NULL,
+    difficulty INT NOT NULL,
+    category INT NOT NULL,
+    cons INT NOT NULL,
+    CONSTRAINT question_difficulty_fk FOREIGN KEY (difficulty) REFERENCES DifficultyTypes(id),
+    CONSTRAINT question_category_fk FOREIGN KEY (category) REFERENCES CategoryTypes(id),
+    CONSTRAINT question_cons_fk FOREIGN KEY (cons) REFERENCES ConsTypes(id),
     PRIMARY KEY (id)
 );
 -- a test case for a question
@@ -47,6 +51,23 @@ CREATE TABLE Result (
     CONSTRAINT result_student_fk FOREIGN KEY (student) REFERENCES User(id) ON DELETE CASCADE,
     CONSTRAINT result_examquestion_fk FOREIGN KEY (exam_question) REFERENCES ExamQuestion(id) ON DELETE CASCADE,
     PRIMARY KEY (id, student, exam_question)
+);
+
+-- ENUM TABLES
+CREATE TABLE DifficultyTypes (
+    id INT NOT NULL UNIQUE AUTO_INCREMENT,
+    difficulty VARCHAR(255) NOT NULL UNIQUE,
+    PRIMARY KEY (id)
+);
+CREATE TABLE CategoryTypes (
+    id INT NOT NULL UNIQUE AUTO_INCREMENT,
+    category VARCHAR(255) NOT NULL UNIQUE,
+    PRIMARY KEY (id)
+);
+CREATE TABLE ConsTypes (
+    id INT NOT NULL UNIQUE AUTO_INCREMENT,
+    cons VARCHAR(255) NOT NULL UNIQUE,
+    PRIMARY KEY (id)
 );
 
 -- JOINER TABLES
