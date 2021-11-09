@@ -27,17 +27,21 @@ $query .= ";";
 $html = '
 <table align="center" border="1px" style="width: 600px; line-height: 40px;">
     <tr>
+        <th>Question ID</th>
         <th>Prompt</th>
         <th>Difficulty</th>
         <th>Category</th>
+        <th></th>
     </tr>';
 $rows = $result->fetch_all(MYSQLI_ASSOC);
 foreach ($rows as $row) {
     $html .= "
         <tr>
-            <td>{$row['prompt']}</td>
-            <td>{$row['difficulty']}</td>
-            <td>{$row['category']}</td>
+            <td id=\"question_{$row['id']}_id\">{$row['id']}</td>
+            <td id=\"question_{$row['id']}_prompt\">{$row['prompt']}</td>
+            <td id=\"question_{$row['id']}_difficulty\">{$row['difficulty']}</td>
+            <td id=\"question_{$row['id']}_category\">{$row['category']}</td>
+            <td id=\"question_{$row['id']}_add_to_exam\"><button onclick=addToExam(\"question_{$row['id']}_id\")>Add to Exam</button></td>
         </tr>\n";
 }
 

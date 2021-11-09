@@ -5,7 +5,11 @@
     <link href="student.css" rel="stylesheet">
     <title>CreateExam Page</title>
 
-    <script src="./question_bank.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+    <script src="question_bank.js"></script>
 </head>
 
 <body>
@@ -41,40 +45,9 @@
         <h1 style="text-align:center; color: #ebebeb;">Create Exam</h1>
     </header>
 
-    <!--
-    <form action="<?=$_SERVER['PHP_SELF'];?>" method="post">
-
-        <div>
-
-            <div>
-                <p style="color: #ebebeb;">Filter questions by difficulty:</p>
-                <button id="pick" name="pick" type="submit" value="Easy" style="margin-bottom:20px;">Easy</button>
-                <button id="pick" name="pick" type="submit" value="Medium" style="margin-bottom:20px;">Medium</button>
-                <button id="pick" name="pick" type="submit" value="Hard" style="margin-bottom:20px;">Hard</button>
-            </div>
-
-            <div>
-                <p style="color: #ebebeb;">Filter questions by category:</p>
-                <button id="pick" name="pick" type="submit" value="recursion" style="margin-bottom:4px;">Recursion</button>
-                <button id="pick" name="pick" type="submit" value="forloop" style="margin-bottom:4px;">For Loop</button>
-                <button id="pick" name="pick" type="submit" value="whileloop" style="margin-bottom:4px;">While Loop</button>
-                <button id="pick" name="pick" type="submit" value="conditional" style="margin-bottom:20px;">Conditional</button>
-                <button id="pick" name="pick" type="submit" value="indexing" style="margin-bottom:20px;">Indexing</button>
-            </div>
-            <br>
-            <div>
-                <p></p>
-                <button id="pick" name="pick" type="submit" value="all" style="margin-bottom:20px;">Make Question For Exam</button>
-            </div>
-        </div>
-
-    </form>
-    -->
     <div id="aa" style="background:#ededed;width:90%;margin:0 auto;margin-top:30px;margin-bottom:50px;text-align:left;">
-        <?php include("/backend/create_exam.php"); ?>
+        <!-- <?php include("/backend/create_exam.php"); ?> -->
     </div>
-
-
 
     <form id="createexam" action="<?=$_SERVER['PHP_SELF'];?>" method="post">
         <table>
@@ -109,18 +82,17 @@
                             <button id="pick" name="pick" type="submit" value="all" style="margin-bottom:20px;">Make Question For Exam</button>
                         </div>
                     </div>
-
+                    <div id="question_bank" style="width:100%;margin:0 auto;margin-top:30px;margin-bottom:50px;text-align:left;">
+                        <script>
+                            getQuestionBank("question_bank");
+                        </script>
+                    </div>
     </form>
-    <div id="question_bank" style="width:100%;margin:0 auto;margin-top:30px;margin-bottom:50px;text-align:left;">
-        <script>
-            getQuestionBank("question_bank");
-        </script>
-    </div>
 
     <td style="width:50%;padding-left:5%;padding-right:5%;padding-top:35px;background:#ededed;" valign="top">
         <p>Selected questions:</p>
         <form action="SubmitPoints.php" id="testtime" method="post" name="testtime">
-            <?php include("GetQuestions.php"); ?>
+            <!-- <?php include("GetQuestions.php"); ?> -->
         </form>
     </td>
     </tr>
