@@ -17,7 +17,7 @@ $question = new Question(
 $test_cases = array();
 
 foreach ($_POST as $key => $value) {
-    if (strpos($key, "test_cases") !== false) {
+    if (strpos($key, "test_cases")) {
         $case = json_decode($value);
         foreach ($case as $in => $out) {
             $test_case = new TestCase($db->escape_string($in), $db->escape_string($out));
