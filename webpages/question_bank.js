@@ -1,14 +1,18 @@
-function getQuestionBank(id, category = "", difficulty = "") {
-    values = {
+function getQuestionBank(id, difficulty = "", category = "", constraint = "") {
+    var values = {
+        difficulty: "",
         category: "",
-        difficulty: ""
+        constraint: ""
     };
 
+    if (difficulty !== "") {
+        values.difficulty = difficulty;
+    }
     if (category !== "") {
         values.category = category;
     }
-    if (difficulty !== "") {
-        values.difficulty = difficulty;
+    if (constraint !== "") {
+        values.constraint = constraint;
     }
 
     $('document').ready(function() {

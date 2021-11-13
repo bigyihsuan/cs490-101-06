@@ -1,5 +1,5 @@
 <?php
-include("../account.php");
+include(__DIR__ . "/../account.php");
 global $db;
 
 $exam_id = $_POST["exam_id"];

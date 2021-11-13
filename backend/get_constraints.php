@@ -1,6 +1,5 @@
 <?php
-include("../account.php");
-include("./data_models.php");
+include(__DIR__ . "/../account.php");
 global $db;
 
 $html = "<label id=\"cons\">Constraint<div><select name=\"constraint\">";

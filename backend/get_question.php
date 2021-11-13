@@ -1,6 +1,6 @@
 <?php
-include("../account.php");
-include("./data_models.php");
+include(__DIR__ . "/../account.php");
+include(__DIR__ . "/data_models.php");
 global $db;
 
 $query = "SELECT * FROM `Question`;";

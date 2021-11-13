@@ -1,6 +1,6 @@
 <?php
-include("../account.php");
-include("./data_models.php");
+include(__DIR__ . "/../account.php");
+include(__DIR__ . "/data_models.php");
 global $db;
 
 // error_log(print_r("{$_POST['question']}, {$_POST['category']}, {$_POST['difficulty']}, {$_POST['useConstraint']}, {$_POST['constraint']}", true));
