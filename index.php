@@ -1,4 +1,3 @@
 <?php
-include_once("./login.html");
-include_once("./account.php");
-?>
+include_once("/webpages/login.html");
+include_once("/account.php");
