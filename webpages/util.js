@@ -19,8 +19,6 @@ function getQuestionBank(id, difficulty = "", category = "", constraint = "") {
         $.post("./question_bank.php", values, function(data) {
             $('#' + id).empty();
             $('#' + id).append(data);
-
-            sorttable.makeSortable($("#question_bank")[0]);
         });
     });
 }
@@ -47,4 +45,11 @@ function getConstraints(id) {
             $('#' + id).append(data);
         });
     });
+}
+
+// https://stackoverflow.com/a/55435856/8143168
+function* chunks(arr, n) {
+    for (let i = 0; i < arr.length; i += n) {
+        yield arr.slice(i, i + n);
+    }
 }

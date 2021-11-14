@@ -10,10 +10,13 @@
     <nav>
         <ul>
             <li>
-                <a href="Instructor.html">Home</a>
+                <a href="Instructor.php">Home</a>
             </li>
             <li>
                 <a href="AddQuestion.html">Add Questions</a>
+            </li>
+            <li>
+                <a href="ListExam.html">List Exams</a>
             </li>
             <li>
                 <a href="CreateExam.html">Create Exam</a>
@@ -28,7 +31,7 @@
                 <a href="ReleaseGrade.html">Release Grade</a>
             </li>
             <li>
-                <a class="active" href="login.html">Log Out</a>
+                <a class="active" href="/backend/logout.php">Log Out</a>
             </li>
         </ul>
         <div class="handle">
@@ -39,6 +42,9 @@
         style="text-align:center; justify-content: center; line-height: 400px; color: #ebebeb;">
         <?php echo "Welcome {$_POST['username']}"; ?>
     </h1>
+</body>
+
+</html>1>
 </body>
 
 </html>

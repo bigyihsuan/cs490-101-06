@@ -10,16 +10,16 @@
     <nav>
         <ul>
             <li>
-                <a href="Student.html">Home</a>
+                <a href="Student.php">Home</a>
             </li>
             <li>
-                <a href="TakeExam.html">Take Exam</a>
+                <a href="ListExam.html">List Exams</a>
             </li>
             <li>
                 <a href="Review.html">Review Exam</a>
             </li>
             <li>
-                <a class="active" href="login.html">Log Out</a>
+                <a class="active" href="/backend/logout.php">Log Out</a>
             </li>
         </ul>
         <div class="handle">

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link href="student.css" rel="stylesheet">
+    <title>List Exam Page</title>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+
+</head>
+
+<body>
+    <nav>
+        <ul>
+            <li>
+                <a href="Student.html">Home</a>
+            </li>
+            <li>
+                <a href="ListExam.html">List Exams</a>
+            </li>
+            <li>
+                <a href="Review.html">Review Exam</a>
+            </li>
+            <li>
+                <a class="active" href="/backend/logout.php">Log Out</a>
+            </li>
+        </ul>
+        <div class="handle">
+            Menu
+        </div>
+    </nav>
+    <h1 style="text-align:left; justify-content: center; line-height: 100px; color: #ebebeb;">Available Exams</h1>
+    <div id="exam_holder">
+    </div>
+    <script>
+        $("document").ready(function() {
+            // console.log("getting");
+            $.post("../backend/get_exam_list.php", function(data) {
+                // console.log(data);
+                $("#exam_holder").empty();
+                $("#exam_holder").append(data);
+            });
+        })
+
+        function goToExam(id) {
+            var form = $(`<form style="display:none;" action="TakeExam.php" method="post"><input type="text" name="exam_id" value=${id}></form>`);
+            $("body").append(form);
+            form.submit();
+        }
+    </script>
+</body>
+
+</html>

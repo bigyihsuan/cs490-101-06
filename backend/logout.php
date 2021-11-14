@@ -8,4 +8,4 @@ unset($_SESSION['is_logged']);
 unset($_SESSION['logged_user']);
 unset($_SESSION['access_level']);
 session_destroy();
-header("refresh:0; url=/login.html");
+header("refresh:0; url=/webpages/login.html");

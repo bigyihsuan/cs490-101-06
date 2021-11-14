@@ -11,7 +11,7 @@
 
     <script src="https://www.kryogenix.org/code/browser/sorttable/sorttable.js"></script>
 
-    <script src="question_bank.js"></script>
+    <script src="util.js"></script>
 
 </head>
 
@@ -23,6 +23,9 @@
             </li>
             <li>
                 <a href="AddQuestion.html">Add Questions</a>
+            </li>
+            <li>
+                <a href="ListExam.html">List Exams</a>
             </li>
             <li>
                 <a href="CreateExam.html">Create Exam</a>
@@ -47,10 +50,6 @@
     <header id="aa">
         <h1 style="text-align:center; color: #ebebeb;">Create Exam</h1>
     </header>
-
-    <div id="aa" style="background:#ededed;width:90%;margin:0 auto;margin-top:30px;margin-bottom:50px;text-align:left;">
-        <!-- <?php include("/backend/create_exam.php"); ?> -->
-    </div>
 
     <table>
         <tr>
@@ -168,13 +167,6 @@
             $("#" + question_id).children('[id$="_score"]').css("display", "none");
 
             $("#question_bank").append($("#" + question_id).detach());
-        }
-
-        // https://stackoverflow.com/a/55435856/8143168
-        function* chunks(arr, n) {
-            for (let i = 0; i < arr.length; i += n) {
-                yield arr.slice(i, i + n);
-            }
         }
     </script>
 </body>

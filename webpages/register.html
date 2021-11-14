@@ -15,10 +15,10 @@
     <nav>
         <ul>
             <li>
-                <a class="active" href="/backend/logout.php">Log Out</a>
+                <a class="active" href="logout.php">Log Out</a>
             </li>
             <li>
-                <a class="active" href="/backend/register.php">Register</a>
+                <a class="active" href="register.php">Register</a>
             </li>
         </ul>
         <div class="handle">
@@ -35,22 +35,29 @@
         <br>
         <label for="password">Password: </label>
         <input type="password" name="password" id="password">
+        <label for="repeat_password">Repeat Password: </label>
+        <input type="password" name="repeat_password" id="repeat_password">
         <br>
         <button type="submit">Login</button>
     </form>
 
-    <div id="login_status"></div>
+    <div id="register_status"></div>
 
     <script>
         $("form").on("submit", function(e) {
             e.preventDefault();
             var username = $("#username").val();
             var password = $("#password").val();
+            var repeat_password = $("#repeat_password").val();
             var up = {
                 username: username,
                 password: password
             };
-            // console.log(up);
+
+            if (password !== repeat_password) {
+                $("#register_status").empty();
+                $("#register_status").append(`<h2>Passwords don't match</h2>`);
+            }
 
             $.post("/backend/login.php", up, function(status) {
                 if (status === "STUDENT") {
@@ -64,8 +71,8 @@
                     form.submit();
                     // window.location.replace("./Instructor.html");
                 } else {
-                    $("#login_status").empty();
-                    $("#login_status").append(status);
+                    $("#register_status").empty();
+                    $("#register_status").append(status);
                 }
             });
         });
