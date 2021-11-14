@@ -84,16 +84,22 @@
 
                 <td style="width:50%;padding-left:5%;padding-right:5%;padding-top:35px;background:#ededed;" valign="top">
                     <p>Selected questions:</p>
-                    <table id="exam_questions">
-                        <tr>
-                            <th>Question ID</th>
-                            <th>Prompt</th>
-                            <th>Difficulty</th>
-                            <th>Category</th>
-                            <th>Constraint</th>
-                            <th>Max Score</th>
-                        </tr>
-                    </table>
+                    <form id="exam_questions_form" method="post">
+                        <input type="submit">
+                        <table id="exam_questions_table">
+                            <thead>
+                                <th>Question ID</th>
+                                <th>Prompt</th>
+                                <th>Difficulty</th>
+                                <th>Category</th>
+                                <th>Constraint</th>
+                                <th>Max Score</th>
+                            </thead>
+                            <tbody id="exam_question_holder">
+
+                            </tbody>
+                        </table>
+                    </form>
                 </td>
         </tr>
     </table>
@@ -112,10 +118,21 @@
                 </td>`;
             questionToAdd.append(scoreBox);
 
-            $("#exam_questions").append(questionToAdd);
+            $("#exam_question_holder").append(questionToAdd);
             // console.log($("#" + id + "_add_to_exam"));
             $("#" + id + "_add_to_exam").detach();
         }
+
+        $("#exam_questions_form").on("submit", function(e) {
+            e.preventDefault();
+            var data = $(this).serializeArray();
+            console.log(data);
+            // $.post("../backend/add_question.php", data);
+            $("#exam_question_holder").children().toArray().forEach(e => {
+                $(e).detach()
+            });
+            getQuestionBank("question_bank");
+        });
     </script>
 </body>
 
