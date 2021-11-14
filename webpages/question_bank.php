@@ -4,7 +4,15 @@ include("../account.php");
 // include("../data_models.php");
 global $db;
 
-$query = "SELECT `Question`.`id`, `Question`.`prompt`, `DifficultyTypes`.`difficulty`, `CategoryTypes`.`category`, `ConsTypes`.`cons`
+$query = "SELECT
+`Question`.`id` AS id,
+`Question`.`prompt` AS prompt,
+`DifficultyTypes`.`id` AS difficulty_id,
+`DifficultyTypes`.`difficulty` AS difficulty,
+`CategoryTypes`.`id` AS category_id,
+`CategoryTypes`.`category` AS category,
+`ConsTypes`.`id` AS cons_id,
+`ConsTypes`.`cons` AS cons
 FROM `Question`
 JOIN `DifficultyTypes` ON `Question`.`difficulty`=`DifficultyTypes`.`id`
 JOIN `CategoryTypes` ON `Question`.`category`=`CategoryTypes`.`id`
@@ -61,14 +69,17 @@ HTML;
 $rows = $result->fetch_all(MYSQLI_ASSOC);
 foreach ($rows as $row) {
     $html .= <<<HTML
-        <tr>
+        <tr id="question_{$row['id']}">
             <td id="question_{$row['id']}_id">{$row['id']}</td>
             <td id="question_{$row['id']}_prompt">{$row['prompt']}</td>
             <td id="question_{$row['id']}_difficulty">{$row['difficulty']}</td>
+            <td id="question_{$row['id']}_difficulty_id" style="display:none;">{$row['difficulty_id']}</td>
             <td id="question_{$row['id']}_category">{$row['category']}</td>
+            <td id="question_{$row['id']}_category_id" style="display:none;">{$row['category_id']}</td>
             <td id="question_{$row['id']}_constraint">{$row['cons']}</td>
+            <td id="question_{$row['id']}_constraint_id" style="display:none;">{$row['cons_id']}</td>
             <td id="question_{$row['id']}_add_to_exam">
-                <button onclick=addToExam("question_{$row['id']}_id")>Add to Exam</button>
+                <button onclick=addToExam("question_{$row['id']}")>Add to Exam</button>
             </td>
         </tr>\n
         HTML;

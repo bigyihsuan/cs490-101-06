@@ -69,9 +69,9 @@
                         var category = $('input[name="filter_category"]:checked').val();
                         var constraint = $('input[name="filter_constraint"]:checked').val();
 
-                        console.log("diff = " + difficulty);
-                        console.log("cat = " + category);
-                        console.log("con = " + constraint);
+                        // console.log("diff = " + difficulty);
+                        // console.log("cat = " + category);
+                        // console.log("con = " + constraint);
 
                         getQuestionBank("question_bank", difficulty, category, constraint);
                     }
@@ -84,14 +84,39 @@
 
                 <td style="width:50%;padding-left:5%;padding-right:5%;padding-top:35px;background:#ededed;" valign="top">
                     <p>Selected questions:</p>
-                    <form action="SubmitPoints.php" id="testtime" method="post" name="testtime">
-                        <!-- <?php include("GetQuestions.php"); ?> -->
-                    </form>
+                    <table id="exam_questions">
+                        <tr>
+                            <th>Question ID</th>
+                            <th>Prompt</th>
+                            <th>Difficulty</th>
+                            <th>Category</th>
+                            <th>Constraint</th>
+                            <th>Max Score</th>
+                        </tr>
+                    </table>
                 </td>
         </tr>
     </table>
+    <script>
+        function addToExam(id) {
+            // console.log(id);
+            var questionToAdd = $("#" + id).remove().clone();
+            // questionToAdd.children().map(function(index, element) {
+            //     // console.log(index);
+            //     // console.log(element);
+            //     console.log(element.id + " " + element.innerHTML);
+            // });
 
+            var scoreBox = `<td id=${id}_max_score>
+                <input type="number"/>
+                </td>`;
+            questionToAdd.append(scoreBox);
 
+            $("#exam_questions").append(questionToAdd);
+            // console.log($("#" + id + "_add_to_exam"));
+            $("#" + id + "_add_to_exam").detach();
+        }
+    </script>
 </body>
 
 </html>
