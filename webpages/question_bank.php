@@ -8,8 +8,11 @@ $query = "SELECT
 `Question`.`id` AS id,
 `Question`.`prompt` AS prompt,
 `DifficultyTypes`.`difficulty` AS difficulty,
+`DifficultyTypes`.`id` AS difficulty_id,
 `CategoryTypes`.`category` AS category,
-`ConsTypes`.`cons` AS cons
+`CategoryTypes`.`id` AS category_id,
+`ConsTypes`.`cons` AS cons,
+`ConsTypes`.`id` AS cons_id
 FROM `Question`
 JOIN `DifficultyTypes` ON `Question`.`difficulty`=`DifficultyTypes`.`id`
 JOIN `CategoryTypes` ON `Question`.`category`=`CategoryTypes`.`id`
@@ -53,7 +56,7 @@ $query .= "\nORDER BY `Question`.`id`;";
 
 ($result = $db->query($query)) or die();
 $html = <<<HTML
-<table align="center" border="1px" style="width: 600px; line-height: 40px;">
+<table id="question_bank" class="sortable" align="center" border="1px" style="width: 600px; line-height: 40px;">
     <tr>
         <th>Question ID</th>
         <th>Prompt</th>
@@ -66,18 +69,24 @@ HTML;
 $rows = $result->fetch_all(MYSQLI_ASSOC);
 foreach ($rows as $row) {
     $html .= <<<HTML
-        <tr id="question_{$row['id']}">
+        <tr id="question_{$row['id']}" class="item">
             <td id="question_{$row['id']}_id">{$row['id']}</td>
             <td id="question_{$row['id']}_prompt">{$row['prompt']}</td>
-            <td id="question_{$row['id']}_difficulty">{$row['difficulty']}</td>
-            <td id="question_{$row['id']}_category">{$row['category']}</td>
-            <td id="question_{$row['id']}_constraint">{$row['cons']}</td>
-            <td id="question_{$row['id']}_add_to_exam">
-                <button onclick=addToExam("question_{$row['id']}")>Add to Exam</button>
+            <td id="question_{$row['id']}_difficulty" sorttable_customkey="{$row['difficulty_id']}">{$row['difficulty']}</td>
+            <td id="question_{$row['id']}_category" sorttable_customkey="{$row['category_id']}">{$row['category']}</td>
+            <td id="question_{$row['id']}_constraint" sorttable_customkey="{$row['cons_id']}">{$row['cons']}</td>
+            <td id="question_{$row['id']}_max_score" style='display:none;'>
+                <input type="number" placeholder="Question Score"/>
             </td>
-        </tr>\n
+            <td id="question_{$row['id']}_add_to_exam" >
+                <button type="button" onclick=addToExam('question_{$row['id']}')>Add to Exam</button>
+            </td>
+            <td id="question_{$row['id']}_remove_from_exam" style="display:none;">
+                <button type="button" onclick=removeFromExam('question_{$row['id']}')>Remove Question</button>
+            </td>
+        </tr>
         HTML;
 }
-$html .= "</table>";
+$html .= '</table>';
 
 echo $html;

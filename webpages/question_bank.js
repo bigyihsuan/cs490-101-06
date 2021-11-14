@@ -19,6 +19,8 @@ function getQuestionBank(id, difficulty = "", category = "", constraint = "") {
         $.post("./question_bank.php", values, function(data) {
             $('#' + id).empty();
             $('#' + id).append(data);
+
+            sorttable.makeSortable($("#question_bank")[0]);
         });
     });
 }
