@@ -1,6 +1,5 @@
 <?php
 include(__DIR__ . "/../account.php");
-include(__DIR__ . "/data_models.php");
 global $db;
 
 // get post request from web page as json
@@ -17,9 +16,11 @@ global $db;
 */
 $questions = array();
 
-foreach ($_POST['question_score'] as $qid => $score) {
+foreach ($_POST['question_data'] as $qid => $score) {
     $questions[$qid] = $score;
 }
+
+// error_log(print_r($questions, true));
 
 // push an exam into the database
 
@@ -31,10 +32,13 @@ $exam_id = $db->insert_id;
 // assign the exam id to the question in the query
 // exam id, question id, max score
 $insert_exam_questions = "INSERT INTO `ExamQuestion` (`exam`, `question`, `max_score`) VALUES ";
-foreach ($questions as $question_id => $max_score) {
-    $insert_exam_questions .= "({$exam_id}, {$question_id}, {$max_score}),";
+foreach ($questions as $question) {
+    foreach ($question as $question_id => $max_score) {
+        // error_log("{$_POST['exam_title']} $question_id $max_score");
+        $insert_exam_questions .= "({$exam_id}, {$question_id}, {$max_score}),";
+    }
 }
 $insert_exam_questions = substr($insert_exam_questions, 0, strlen($insert_exam_questions) - 1) . ";";
-
+// error_log($insert_exam_questions);
 // push to the database
 $db->query($insert_exam_questions);

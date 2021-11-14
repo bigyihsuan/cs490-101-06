@@ -83,9 +83,10 @@
                 </div>
 
                 <td style="width:50%;padding-left:5%;padding-right:5%;padding-top:35px;background:#ededed;" valign="top">
-                    <p>Selected questions:</p>
+                    <p>Exam Questions</p>
                     <form id="exam_questions_form" method="post">
-                        <input type="submit">
+                        <input type="submit"><br>
+                        <input id="exam_title" type="text" placeholder="Exam Title">
                         <table id="exam_questions_table">
                             <thead>
                                 <th>Question ID</th>
@@ -114,7 +115,7 @@
             // });
 
             var scoreBox = `<td id=${id}_max_score>
-                <input type="number"/>
+                <input type="number" placeholder="Question Score"/>
                 </td>`;
             questionToAdd.append(scoreBox);
 
@@ -123,14 +124,48 @@
             $("#" + id + "_add_to_exam").detach();
         }
 
+        // https://stackoverflow.com/a/55435856/8143168
+        function* chunks(arr, n) {
+            for (let i = 0; i < arr.length; i += n) {
+                yield arr.slice(i, i + n);
+            }
+        }
+
         $("#exam_questions_form").on("submit", function(e) {
             e.preventDefault();
-            var data = $(this).serializeArray();
-            console.log(data);
-            // $.post("../backend/add_question.php", data);
-            $("#exam_question_holder").children().toArray().forEach(e => {
-                $(e).detach()
+            var examTitle = $("#exam_title").val();
+            // console.log(examTitle);
+            var questions = $("#exam_question_holder")
+                .children()
+                .children()
+                .filter('[id$="_id"],[id$="_score"]')
+                .toArray()
+                .map(ele => ele.innerText !== '' ? ele.innerText : $(ele).children(":first").val());
+            // console.log(questions);
+
+            var chunked = [...chunks(questions, 2)].map(tup => ({
+                [tup[0]]: tup[1],
+            }));
+            // console.log(chunked);
+
+            if (examTitle === "") {
+                alert("empty exam title");
+                return;
+            }
+
+            if (chunked.some(obj => obj.score === '')) {
+                alert("empty score, enter a score");
+                return;
+            }
+
+            $.post("/backend/create_exam.php", ({
+                exam_title: examTitle,
+                question_data: chunked
+            }));
+            $("#exam_question_holder").children().toArray().forEach(el => {
+                $(el).detach()
             });
+            $("#exam_title").val('');
             getQuestionBank("question_bank");
         });
     </script>
