@@ -51,8 +51,11 @@
             student_response: tup[1]
         }));
 
+        var exam_id = $("#exam_id").val();
+
         // console.log(chunked);
         $.post("/backend/create_result.php", ({
+            exam_id: exam_id,
             student_responses: chunked
         }));
 

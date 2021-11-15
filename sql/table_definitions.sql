@@ -44,7 +44,6 @@ CREATE TABLE ExamQuestion (
 -- a student's result of taking an exam
 CREATE TABLE Result (
     id INT NOT NULL UNIQUE AUTO_INCREMENT,
-    student INT NOT NULL,
     exam_question INT NOT NULL,
     response TEXT,
     score INT,
@@ -78,4 +77,15 @@ CREATE TABLE QuestionTestCase (
     CONSTRAINT questiontestcase_question_fk FOREIGN KEY (question) REFERENCES Question(id) ON DELETE CASCADE,
     CONSTRAINT questiontestcase_testcase_fk FOREIGN KEY (test_case) REFERENCES TestCase(id) ON DELETE CASCADE,
     PRIMARY KEY (question, test_case)
+);
+
+CREATE TABLE StudentExamResult (
+    id INT NOT NULL AUTO_INCREMENT UNIQUE,
+    student INT NOT NULL,
+    exam INT NOT NULL,
+    result INT NOT NULL,
+    CONSTRAINT studentexam_student_fk FOREIGN KEY (student) REFERENCES User(id) ON DELETE CASCADE,
+    CONSTRAINT studentexam_exam_fk FOREIGN KEY (exam) REFERENCES Exam(id) ON DELETE CASCADE,
+    CONSTRAINT studentexam_result_fk FOREIGN KEY (result) REFERENCES Result(id) ON DELETE CASCADE,
+    PRIMARY KEY (id)
 );

@@ -28,6 +28,7 @@ $rows = $result->fetch_all(MYSQLI_ASSOC);
 
 $questions = <<<HTML
 <h1>$title</h1>
+<p id="exam_id" style="display:none;">$exam_id</p>
 <table id="exam_questions" align="center" border="1px" style="width: 600px; line-height: 40px;">
 HTML;
 
