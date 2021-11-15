@@ -10,5 +10,5 @@ for author in "${authors[@]}"; do
     echo "$author"
     rm "$author.txt"
     echo "$author.txt removed"
-    git show $(git log --author="$author" | grep ^commit | awk -F ' ' '{print $2}') >"$author.txt"
+    git show --oneline $(git log --author="$author" | grep ^commit | awk -F ' ' '{print $2}') >"$author.txt"
 done

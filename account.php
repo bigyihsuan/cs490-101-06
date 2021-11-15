@@ -4,15 +4,15 @@
 
 $url = parse_url(getenv("CLEARDB_DATABASE_URL"));
 
-// $hostname = $url["host"];
-// $username = $url["user"];
-// $password = substr($url["path"], 1);
-// $project  = $url["pass"];
+$hostname = $url["host"];
+$username = $url["user"];
+$password = substr($url["path"], 1);
+$project  = $url["pass"];
 
-$hostname = "us-cdbr-east-04.cleardb.com";
-$username = "b9960caeae98e0";
-$password = "5ee5fe3e";
-$project  = "heroku_454624e55acb805";
+// $hostname = "us-cdbr-east-04.cleardb.com";
+// $username = "b9960caeae98e0";
+// $password = "5ee5fe3e";
+// $project  = "heroku_454624e55acb805";
 
 $db = new mysqli($hostname, $username, $password, $project);
 if (mysqli_connect_errno()) {
