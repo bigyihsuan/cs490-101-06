@@ -5,13 +5,15 @@ global $db;
 session_start();
 
 $student_id = $_SESSION['logged_user'];
-// format per row:
-// exam_question_id => question response
+error_log("creating result for $student_id");
 $responses = $_POST['student_responses'];
-// error_log(print_r($responses, true));
 $exam_id = $_POST['exam_id'];
 
+error_log(print_r($responses, true));
+
 foreach ($responses as $question_response) {
+    error_log(print_r($question_response, true));
+
     $insert_student_response = <<<SQL
 INSERT INTO `Result` (`exam_question`, `response`)
 VALUES 
@@ -23,6 +25,8 @@ SQL;
 SQL;
     $insert_student_response .= ";";
 
+    error_log($insert_student_response);
+
     $db->query($insert_student_response);
     $result_id = $db->insert_id;
 
@@ -30,5 +34,8 @@ SQL;
 INSERT INTO `StudentExamResult` (`student`, `exam`, `result`)
 VALUES ($student_id, $exam_id, $result_id);
 SQL;
+    error_log($insert_student_exam_result);
     $db->query($insert_student_exam_result);
 }
+
+error_log("Finished creating results");

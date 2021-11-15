@@ -13,6 +13,7 @@ CREATE TABLE Question (
     difficulty INT NOT NULL,
     category INT NOT NULL,
     cons INT NOT NULL,
+    solution TEXT,
     CONSTRAINT question_difficulty_fk FOREIGN KEY (difficulty) REFERENCES DifficultyTypes(id),
     CONSTRAINT question_category_fk FOREIGN KEY (category) REFERENCES CategoryTypes(id),
     CONSTRAINT question_cons_fk FOREIGN KEY (cons) REFERENCES ConsTypes(id),
@@ -67,6 +68,7 @@ CREATE TABLE CategoryTypes (
 CREATE TABLE ConsTypes (
     id INT NOT NULL UNIQUE AUTO_INCREMENT,
     cons VARCHAR(255) NOT NULL UNIQUE,
+    search_string VARCHAR(255) NOT NULL,
     PRIMARY KEY (id)
 );
 

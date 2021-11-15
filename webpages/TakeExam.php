@@ -42,8 +42,11 @@
     $("#exam_holder").on("submit", function(e) {
         e.preventDefault();
         var elements = $("[id$='id'], textarea").toArray().map(
-            ele => ele.innerText !== '' ? ele.innerText :
-            $(ele).val());
+            ele => ele.innerText !== '' ? ele.innerText : $(ele)
+            .val());
+
+        var exam_id = elements[0];
+        elements = elements.slice(1);
         // console.log(elements);
 
         var chunked = [...chunks(elements, 2)].map(tup => ({
@@ -51,13 +54,12 @@
             student_response: tup[1]
         }));
 
-        var exam_id = $("#exam_id").val();
-
-        // console.log(chunked);
-        $.post("/backend/create_result.php", ({
+        var obj = {
             exam_id: exam_id,
             student_responses: chunked
-        }));
+        };
+        // console.log(obj);
+        $.post("/backend/create_result.php", obj);
 
         window.location.replace("/webpages/ListExam.html");
     });

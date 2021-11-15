@@ -21,7 +21,7 @@ foreach ($rows as $row) {
     // error_log(print_r($row, true));
     $exam_table .= <<<HTML
         <tr>
-            <td>{$row['id']}</td>
+            <td style="display:none;">{$row['id']}</td>
             <td>{$row['title']}</td>
             <td><button type="button" onclick="goToExam({$row['id']})">Take Exam</button></td>
         </tr>

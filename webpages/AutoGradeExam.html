@@ -1,71 +1,82 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-	<link href="student.css" rel="stylesheet">
-	<title>AutoGradeExam Page</title>
+    <link href="student.css" rel="stylesheet">
+    <title>AutoGradeExam Page</title>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 </head>
+
 <body>
-		<nav>
-			<ul>
-				<li>
-					<a href="Instructor.html">Home</a>
-				</li>
-				<li>
-					<a href="AddQuestion.html">Add Questions</a>
-				</li>
-				<li>
-					<a href="CreateExam.html">Create Exam</a>
-				</li>
-				<li>
-					<a href="AutoGradeExam.html">AutoGrade Exam</a>
-				</li>
-				<li>
-					<a href="ReviewExam.html">Review Exam</a>
-				</li>
-				<li>
-					<a href="ReleaseGrade.html">Release Grade</a>
-				</li>
-				<li>
-					<a class="active" href="login.html">Log Out</a>
-				</li>
-			</ul>
-			<div class="handle">
-				Menu
-			</div>
-		</nav>
-		<header id="aa">
-			<h1 style="text-align:center; color: #ebebeb;">AutoGrade Exam</h1>
-		</header>
-
-            
-	    <form action="AutoGradeExam.php" method="post">
-            <div>
-				<div class="custom-select" style=" width:100%; display: block; margin-left: auto; margin-right: auto;">
-					<select>
-						<option value="0">Choose Exam:</option>
-						<option value="1">Exam1:</option>
-					</select>	
-				</div>
+    <nav>
+        <ul>
+            <li>
+                <a href="Instructor.html">Home</a>
+            </li>
+            <li>
+                <a href="AddQuestion.html">Add Questions</a>
+            </li>
+            <li>
+                <a href="CreateExam.html">Create Exam</a>
+            </li>
+            <li>
+                <a href="AutoGradeExam.html">AutoGrade Exam</a>
+            </li>
+            <li>
+                <a href="ReviewExam.html">Review Exam</a>
+            </li>
+            <li>
+                <a href="ReleaseGrade.html">Release Grade</a>
+            </li>
+            <li>
+                <a class="active" href="/backend/logout.php">Log Out</a>
+            </li>
+        </ul>
+        <div class="handle">
+            Menu
+        </div>
+    </nav>
+    <header id="aa">
+        <h1 style="text-align:center; color: #ebebeb;">AutoGrade Exam</h1>
+    </header>
 
 
+    <h1 style="text-align:left; justify-content: center; line-height: 100px; color: #ebebeb;">Available Exams</h1>
+    <div id="exam_holder">
+    </div>
+    <script>
+        $("document").ready(function() {
+            // console.log("getting");
+            $.post("../backend/get_exams_to_grade.php", function(data) {
+                // console.log(data);
+                $("#exam_holder").empty();
+                $("#exam_holder").append(data);
+            });
+        })
+
+        function autogradeExam(exam_id, student_id) {
+            $.post("/backend/autograde_student_exam.php", ({
+                exam_id: exam_id,
+                student_id: student_id
+            }));
+            $("[id*='" + exam_id + "']").remove();
+        }
+    </script>
 
 
-                <div>
-                    <br><br><br><br><button type="submit" value="Submit">Enter!</button>
-                </div>
-            </div>
 
-        </form>
-
-		<!--
-	    <p style="text-align:center; color: #ebebeb;">Delete all questions.</p>
-	    <form action="Reset.php" method="post">
-		    <br>
-		    <button type="submit" value="grade">Reset</button>
-	    </form>
-		-->
-		
-	
-	
 </body>
+
 </html>
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link href="student.css" rel="stylesheet">
+    <title>List Exam Page</title>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+
+</head>
