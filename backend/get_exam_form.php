@@ -6,21 +6,23 @@ $exam_id = $_POST["exam_id"];
 // error_log($exam_id);
 
 // get exam, and associated questions
-$get_exam_title =
-    "SELECT `Exam`.title AS `exam_title`
+$get_exam_title = <<<SQL
+SELECT `Exam`.title AS `exam_title`
     FROM `Exam`
-    WHERE `Exam`.`id`={$exam_id};";
+    WHERE `Exam`.`id`={$exam_id};
+SQL;
 ($result = $db->query($get_exam_title)) or die();
 $title = $result->fetch_assoc()['exam_title'];
 
-$get_exam_form =
-    "SELECT
-        `ExamQuestion`.`id` AS `exam_question_id`,
-        `Question`.`prompt` AS `question_prompt`
-    FROM `Question`
-    JOIN `ExamQuestion` ON `ExamQuestion`.`question`=`Question`.`id`
-    JOIN `Exam` ON `Exam`.`id`=`ExamQuestion`.`exam`
-    WHERE `Exam`.`id`={$exam_id};";
+$get_exam_form = <<<SQL
+SELECT
+    `ExamQuestion`.`id` AS `exam_question_id`,
+    `Question`.`prompt` AS `question_prompt`
+FROM `Question`
+JOIN `ExamQuestion` ON `ExamQuestion`.`question`=`Question`.`id`
+JOIN `Exam` ON `Exam`.`id`=`ExamQuestion`.`exam`
+WHERE `Exam`.`id`={$exam_id};
+SQL;
 ($result = $db->query($get_exam_form)) or die();
 $rows = $result->fetch_all(MYSQLI_ASSOC);
 

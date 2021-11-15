@@ -160,20 +160,3 @@ foreach ($student_ids as $row) {
         // echo "$result\n";
     }
 }
-// $code = <<<PY
-// def add(a, b):
-//  return a+b
-// print(add(10, -5))
-// PY;
-// // $code = addslashes($code);
-
-// $result = $db->query($query);
-// $rows = $result->fetch_all(MYSQLI_ASSOC);
-
-// /* need per question:
-// * results student response
-// * question max score
-// */
-
-// foreach ($rows as $row) {
-// }
