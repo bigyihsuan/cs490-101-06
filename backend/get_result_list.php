@@ -29,12 +29,14 @@ HTML;
 
 foreach ($rows as $row) {
     // error_log(print_r($row, true));
+    $student = $row['student'];
+    $exam_title = $row['exam_title'];
     $result_table .= <<<HTML
         <tr>
             <td>{$row['student']}</td>
             <td>{$row['exam_title']}</td>
-            <td><button type="button" onclick=goToExamResult("{$row['student']}","{$row['exam_title']}")>View Result</button></td>
-            <td><button type="button" onclick=releaseExamResult("{$row['student']}","{$row['exam_title']}")>Release Result</button></td>
+            <td><button type="button" onclick="goToExamResult('$student', '$exam_title')">View Result</button></td>
+            <td><button type="button" onclick="releaseExamResult('$student', '$exam_title', $(this))">Release Result</button></td>
         </tr>
     HTML;
 }

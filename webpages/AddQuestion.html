@@ -3,7 +3,7 @@
 
 <head>
     <link href="student.css" rel="stylesheet">
-    <title>Add Question</title>
+    <title>ReviewExam Page</title>
 
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 </head>
@@ -24,7 +24,7 @@
                 <a href="AutoGradeExam.html">AutoGrade Exam</a>
             </li>
             <li>
-                <a href="ReviewExam.html">Review Exam</a>
+                <a href="ReviewExamList.html">Review Exam</a>
             </li>
             <li>
                 <a href="ReleaseGrade.html">Release Grade</a>
@@ -37,101 +37,102 @@
             Menu
         </div>
     </nav>
-    <h1 style="text-align:left; justify-content: center; line-height: 100px; color: #ebebeb;">
-        Exam Start Now!!!</h1>
-    <form id="exam_holder" method="POST" action="/backend/create_result.php">
-        <?php
-        include(__DIR__ . "/../backend/get_exam_form.php");
-        ?>
-            <button type="submit">Submit Exam</button>
-    </form>
+    <h1 style="text-align:center; color: #ebebeb;">Review Student's Exam Grades for edit and comment</h1>
+
+    <div id="result_holder"></div>
+
+    <script>
+        $("document").ready(function() {
+            // console.log("getting");
+            $.post("../backend/get_result_list.php", function(data) {
+                // console.log(data);
+                $("#result_holder").empty();
+                $("#result_holder").append(data);
+            });
+        })
+
+        function goToExamResult(student, exam_title) {
+            var form = $(`<form style="display:none;" action="ReviewExam.php" method="post"><input type="text" name="student" value=${student}><input type="text" name="exam_title" value=${exam_title}></form>`);
+            $("body").append(form);
+            form.submit();
+        }
+
+        function releaseExamResult(student, exam_title) {
+            // $.post("../backend/release_exam_result.php", ({
+            //         student: student,
+            //         exam_title: exam_title
+            //     }),
+            //     function(data) {
+
+            //     });
+            console.log($('#result_holder td:contains("${student}") td:contains("${exam_title}")'));
+        }
+    </script>
+
 </body>
 
 </html>
-</li>
-<li>
-    <a class="active" href="login.html">Log Out</a>
-</li>
-</ul>
-<div class="handle">
-    Menu
-</div>
-</nav>
-<header id="aa">
-    <h1 style="text-align:center; color: #ebebeb;">Add Questions</h1>
-</header>
-<table>
-    <tr>
-        <td style="width:30%;padding-left:10px;padding-right:10px;padding-top:35px;" valign="top">
-
-            <form id="questionForm" method="post">
-                <div id="aa">
-                    <label class="desc" for="question" id="question" style="text-align:center;">Question Box</label>
-                    <div>
-                        <textarea id="question" name="question" spellcheck="true" style="width:90%;height:100px;" tabindex="1"></textarea>
-                    </div>
-                </div><br>
-                <!--
+<!--
                     <div id="aa">
                         <label class="desc" for="function_name" id="function_name">Function Name</label>
                         <div><input class="field text fn" id="function_name" name="function_name" size="20" tabindex="2" type="text" value=""></div>
                     </div><br>
                     -->
-                <div id="questionCategory">
-                    <script>
-                        getCategories("questionCategory");
-                    </script>
-                </div><br>
+<div id="questionCategory">
+    <script>
+        getCategories("questionCategory");
+    </script>
+</div><br>
 
-                <div id="questionDifficulty">
-                    <script>
-                        getDifficulties("questionDifficulty");
-                    </script>
-                </div><br>
+<div id="questionDifficulty">
+    <script>
+        getDifficulties("questionDifficulty");
+    </script>
+</div><br>
 
-                <div id="questionConstraint">
-                    <table>
-                        <tr>
-                            <td>
-                                <input type="checkbox" name="useConstraint" id="useConstraint">
-                                <label for="useConstraint">Use Constraint?</label>
-                            </td>
-                            <td>
-                                <script>
-                                    getConstraints("questionConstraint");
-                                </script>
-                            </td>
-                        </tr>
-                    </table>
-                </div><br>
-
-
-
-
-                <br />
-                <div>
-                    <button type="button" class="btn btn-primary" onclick="addTag()">Add Test Case</button>
-                    <button type="button" class="btn btn-primary" onclick="removeAllTags()">Remove All Test Cases</button>
-                    <button id="saveForm" name="saveForm" type="submit" class="btn btn-primary">Submit Question</button>
-                </div>
-
-                <div id="testCases" class="container-fluid"></div>
-            </form>
-
-
-
-        </td>
-
-        <td style="width:70%;padding-left:10px;padding-right:10px;padding-top:35px;" valign="top">
-            <p style="color: #ebebeb;">Selected questions</p>
-            <div id="question_bank" style="width:90%;margin:0 auto;margin-top:30px;margin-bottom:50px;text-align:left;">
+<div id="questionConstraint">
+    <table>
+        <tr>
+            <td>
+                <input type="checkbox" name="useConstraint" id="useConstraint">
+                <label for="useConstraint">Use Constraint?</label>
+            </td>
+            <td>
                 <script>
-                    getQuestionBank("question_bank");
+                    getConstraints("questionConstraint");
                 </script>
-            </div>
-        </td>
+            </td>
+        </tr>
+    </table>
+</div><br>
 
-    </tr>
+
+
+
+<br />
+<div>
+    <button type="button" class="btn btn-primary" onclick="addTag()">Add Test Case</button>
+    <button type="button" class="btn btn-primary" onclick="removeAllTags()">Remove All Test Cases</button>
+    <button id="saveForm" name="saveForm" type="submit" class="btn btn-primary">Submit Question</button>
+</div>
+
+<div id="testCases" class="container-fluid"></div>
+</form>
+
+
+
+</td>
+
+<td style="width:70%;padding-left:10px;padding-right:10px;padding-top:35px;" valign="top">
+    <p style="color: #ebebeb;">Selected questions</p>
+    <div id="question_bank" style="width:90%;margin:0 auto;margin-top:30px;margin-bottom:50px;text-align:left;">
+        <script>
+            getQuestionBank("question_bank");
+        </script>
+    </div>
+</td>
+
+</tr>
 </table>
 </body>
 

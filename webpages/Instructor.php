@@ -25,7 +25,7 @@
                 <a href="AutoGradeExam.html">AutoGrade Exam</a>
             </li>
             <li>
-                <a href="ReviewExam.html">Review Exam</a>
+                <a href="ReviewExamList.html">Review Exam</a>
             </li>
             <li>
                 <a href="ReleaseGrade.html">Release Grade</a>
@@ -38,8 +38,7 @@
             Menu
         </div>
     </nav>
-    <h1
-        style="text-align:center; justify-content: center; line-height: 400px; color: #ebebeb;">
+    <h1 style="text-align:center; justify-content: center; line-height: 400px; color: #ebebeb;">
         <?php echo "Welcome {$_POST['username']}"; ?>
     </h1>
 </body>

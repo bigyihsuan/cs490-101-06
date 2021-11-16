@@ -86,6 +86,7 @@ CREATE TABLE StudentExamResult (
     student INT NOT NULL,
     exam INT NOT NULL,
     result INT NOT NULL,
+    released BOOLEAN NOT NULL DEFAULT 0,
     CONSTRAINT studentexam_student_fk FOREIGN KEY (student) REFERENCES User(id) ON DELETE CASCADE,
     CONSTRAINT studentexam_exam_fk FOREIGN KEY (exam) REFERENCES Exam(id) ON DELETE CASCADE,
     CONSTRAINT studentexam_result_fk FOREIGN KEY (result) REFERENCES Result(id) ON DELETE CASCADE,

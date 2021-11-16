@@ -24,7 +24,7 @@
                 <a href="AutoGradeExam.html">AutoGrade Exam</a>
             </li>
             <li>
-                <a href="ReviewExam.html">Review Exam</a>
+                <a href="ReviewExamList.html">Review Exam</a>
             </li>
             <li>
                 <a href="ReleaseGrade.html">Release Grade</a>
@@ -49,23 +49,24 @@
                 $("#result_holder").empty();
                 $("#result_holder").append(data);
             });
-        })
+        });
 
         function goToExamResult(student, exam_title) {
-            var form = $(`<form style="display:none;" action="ReviewExam.php" method="post"><input type="text" name="student" value=${student}><input type="text" name="exam_title" value=${exam_title}></form>`);
+            console.log(student + " " + exam_title);
+            var form = $(`<form style="display:none;" action="ReviewExam.php" method="post">
+            <input type="text" name="student" value="${student}">
+            <input type="text" name="exam_title" value="${exam_title}">
+            </form>`);
             $("body").append(form);
             form.submit();
         }
 
-        function releaseExamResult(student, exam_title) {
-            // $.post("../backend/release_exam_result.php", ({
-            //         student: student,
-            //         exam_title: exam_title
-            //     }),
-            //     function(data) {
-
-            //     });
-            console.log($('#result_holder td:contains("${student}") td:contains("${exam_title}")'));
+        function releaseExamResult(student, exam_title, element) {
+            $.post("../backend/release_exam.php", ({
+                student: student,
+                exam_title: exam_title
+            }));
+            $(element).parent().parent().remove();
         }
     </script>
 

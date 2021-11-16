@@ -6,6 +6,15 @@ $exam_title = $_POST['exam_title'];
 $student = $_POST['student'];
 // error_log($exam_id);
 
+$get_ser_id = <<<SQL
+SELECT StudentExamResult.id FROM StudentExamResult
+JOIN User ON User.id=StudentExamResult.student
+JOIN Exam ON Exam.id=StudentExamResult.exam
+WHERE User.username="{$student}" && Exam.title="{$exam_title}"
+SQL;
+($result = $db->query($get_ser_id)) or die();
+$ser_id = $result->fetch_all(MYSQLI_ASSOC)[0]['id'];
+
 // get exam, and associated results
 $get_results_of_student_on_exam = <<<SQL
 SELECT
@@ -32,32 +41,33 @@ $student_results = $result->fetch_all(MYSQLI_ASSOC);
 // error_log(print_r($rows, true));
 
 $results = <<<HTML
-<h1>$title</h1>
-<p id="exam_id" style="display:none;">$exam_id</p>
+<h1>$exam_title</h1>
+<p id="ser_id" style="display:none;">{$ser_id}</p>
 <table id="exam_results" align="center" border="1px" style="width: 600px; line-height: 40px;">
 <thead>
-    <tr>Student Response</tr>
-    <tr>Student Score</tr>
-    <tr>Question Max Score</tr>
-    <tr>Comment</tr>
+    <td>Student Response</td>
+    <td>Student Score</td>
+    <td>Question Max Score</td>
+    <td>Comment</td>
 </thead>
 HTML;
 
 foreach ($student_results as $student_result) {
     // keys: exam_title, result, max_score
     // error_log(print_r($row, true));
-    $id = $student_result['id'];
+    $ser_id = $student_result['id'];
     $response = $student_result['response'];
     $score = $student_result['score'];
     $max_score = $student_result['max_score'];
     $comment = $student_result['comment'];
 
     $result_row = <<<HTML
-    <tr id="{$id}">
+    <tr>
+        <td id="result_{$student_result['result']}_id" style="display:none;">{$student_result['result']}</td>
         <td>{$response}</td>
-        <td><input id="score_{$id}" type="text"> {$score}</td>
+        <td><input id="score_{$ser_id}" type="number" value="{$score}"></td>
         <td>{$max_score}</td>
-        <td><input id="comment_{$id}" type="text"> {$comment}</td>
+        <td><textarea id="comment_{$ser_id}" type="text" cols="40" rows="10">{$comment}</textarea></td>
     </tr>
     HTML;
     $results .= $result_row;

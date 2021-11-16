@@ -66,9 +66,9 @@ foreach ($student_ids as $row) {
         error_log(print_r($student_fun_name, true));
         if ($student_fun_name !== $fun_name) {
             $exam_result['response'] = preg_filter("/$student_fun_name/", "/$fun_name/", $exam_result['response']);
-            $comment .= "Incorrect function name: 0/{$score_per_case}\n";
+            $comment .= "Incorrect function name: 0/{$max_score}\n";
         } else {
-            $comment .= "Correct function name: $score_per_case/{$score_per_case}\n";
+            $comment .= "Correct function name: $score_per_case/{$max_score}\n";
             $current_score += $max_score / $test_case_count;
         }
 
@@ -111,7 +111,7 @@ foreach ($student_ids as $row) {
             // echo "$case {$pair[0]} {$pair[1]}\n";
             $pair = $case[1];
             if ($pair[0] == $pair[1]) {
-                $comment .= "Succeeds $case[0]: $score_per_case/{$score_per_case}\n";
+                $comment .= "Succeeds $case[0]: $score_per_case/{$max_score}\n";
                 $current_score += $max_score / $test_case_count;
             } else {
                 $comment .= "Fails $case[0]: 0/{$score_per_case}\n";
@@ -120,28 +120,28 @@ foreach ($student_ids as $row) {
         switch ($constraint) {
             case "for": {
                     if (!preg_match("/for .+:/", $solution)) {
-                        $comment .= "Succeeds constraint $constraint_name: $score_per_case/{$score_per_case}\n";
+                        $comment .= "Succeeds constraint $constraint_name: $score_per_case/{$max_score}\n";
                         $current_score += $max_score / $test_case_count;
                     } else {
-                        $comment .= "Fails constraint $constraint_name: $score_per_case/{$score_per_case}\n";
+                        $comment .= "Fails constraint $constraint_name: $score_per_case/{$max_score}\n";
                     }
                     break;
                 }
             case "while": {
                     if (!preg_match("/while .+:/", $solution)) {
-                        $comment .= "Succeeds constraint $constraint_name: $score_per_case/{$score_per_case}\n";
+                        $comment .= "Succeeds constraint $constraint_name: $score_per_case/{$max_score}\n";
                         $current_score += $max_score / $test_case_count;
                     } else {
-                        $comment .= "Fails constraint $constraint_name: $score_per_case/{$score_per_case}\n";
+                        $comment .= "Fails constraint $constraint_name: $score_per_case/{$max_score}\n";
                     }
                     break;
                 }
             case "def": {
                     if (!preg_match("/def (.+):.*($1)/", $solution)) {
-                        $comment .= "Succeeds constraint $constraint_name: $score_per_case/{$score_per_case}\n";
+                        $comment .= "Succeeds constraint $constraint_name: $score_per_case/{$max_score}\n";
                         $current_score += $max_score / $test_case_count;
                     } else {
-                        $comment .= "Fails constraint $constraint_name: $score_per_case/{$score_per_case}\n";
+                        $comment .= "Fails constraint $constraint_name: $score_per_case/{$max_score}\n";
                     }
                     break;
                 }
