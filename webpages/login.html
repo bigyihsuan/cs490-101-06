@@ -52,7 +52,7 @@
             };
             // console.log(up);
 
-            $.post("/backend/login.php", up, function(status) {
+            $.post("../backend/login.php", up, function(status) {
                 if (status === "STUDENT") {
                     var form = $(`<form style="display:none;" action="Student.php" method="post"><input type="text" name="username" value=${username}></form>`);
                     $("body").append(form);

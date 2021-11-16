@@ -19,7 +19,7 @@
                 <a href="Review.html">Review Exam</a>
             </li>
             <li>
-                <a class="active" href="/backend/logout.php">Log Out</a>
+                <a class="active" href="../backend/logout.php">Log Out</a>
             </li>
         </ul>
         <div class="handle">

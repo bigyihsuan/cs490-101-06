@@ -133,3 +133,13 @@ button:hover {
         display: block;
     }
 }
+
+table.table {
+    color: #eee;
+    font-family: Arial, sans-serif;
+    border: 1px solid #ccc;
+}
+
+table.table td {
+    border: 1px solid blue;
+}
