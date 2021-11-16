@@ -1,5 +1,6 @@
 <?php
 include(__DIR__ . "/functions.php");
+include(__DIR__ . "/../account.php");
 
 session_start();
 
