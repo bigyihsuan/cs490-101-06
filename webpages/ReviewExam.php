@@ -28,9 +28,7 @@
             <li>
                 <a href="ReviewExamList.html">Review Exam</a>
             </li>
-            <li>
-                <a href="ReleaseGrade.html">Release Grade</a>
-            </li>
+
             <li>
                 <a class="active" href="/backend/logout.php">Log Out</a>
             </li>
@@ -45,7 +43,7 @@
         <?php
         include(__DIR__ . "/../backend/get_exam_review.php");
         ?>
-            <button type="submit">Save Review</button>
+        <button type="submit">Save Review</button>
     </form>
 
     <script>

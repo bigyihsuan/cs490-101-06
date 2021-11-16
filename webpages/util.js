@@ -25,7 +25,7 @@ function getQuestionBank(id, difficulty = "", category = "", constraint = "") {
 
 function getDifficulties(id) {
     $('document').ready(function() {
-        $.post("../backend/get_difficulties.php", values, function(data) {
+        $.post("../backend/get_difficulties.php", function(data) {
             $('#' + id).append(data);
         });
     });
@@ -33,7 +33,7 @@ function getDifficulties(id) {
 
 function getCategories(id) {
     $('document').ready(function() {
-        $.post("../backend/get_categories.php", values, function(data) {
+        $.post("../backend/get_categories.php", function(data) {
             $('#' + id).append(data);
         });
     });
@@ -41,7 +41,7 @@ function getCategories(id) {
 
 function getConstraints(id) {
     $('document').ready(function() {
-        $.post("../backend/get_constraints.php", values, function(data) {
+        $.post("../backend/get_constraints.php", function(data) {
             $('#' + id).append(data);
         });
     });
