@@ -16,7 +16,7 @@
                 <a href="ListExam.html">List Exams</a>
             </li>
             <li>
-                <a href="Review.html">Review Exam</a>
+                <a href="viewResults.php">Review Exam</a>
             </li>
             <li>
                 <a class="active" href="../backend/logout.php">Log Out</a>
