@@ -45,7 +45,7 @@ foreach ($rows as $row) {
         <td>$question_prompt</td>
     </tr>
     <tr>
-        <td><textarea id="exam_question_id{$question_id}_answer" name="exam_question_{$exam_question_id}_answer" cols="40" rows="10"></textarea></td>
+        <td><textarea id="exam_question_id{$exam_question_id}_answer" name="exam_question_{$exam_question_id}_answer" cols="40" rows="10"></textarea></td>
     </tr>
     HTML;
     $questions .= $question_row;
