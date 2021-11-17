@@ -16,9 +16,6 @@
                 <a href="AddQuestion.html">Add Questions</a>
             </li>
             <li>
-                <a href="ListExam.html">List Exams</a>
-            </li>
-            <li>
                 <a href="CreateExam.html">Create Exam</a>
             </li>
             <li>
@@ -36,7 +33,8 @@
             Menu
         </div>
     </nav>
-    <h1 style="text-align:center; justify-content: center; line-height: 400px; color: #ebebeb;">
+    <h1
+        style="text-align:center; justify-content: center; line-height: 400px; color: #ebebeb;">
         <?php echo "Welcome {$_POST['username']}"; ?>
     </h1>
 </body>

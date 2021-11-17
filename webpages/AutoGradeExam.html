@@ -42,28 +42,25 @@
     <script>
         $("document").ready(function() {
             // console.log("getting");
-            $.post("../backend/get_result_list.php", function(data) {
+            $.post("../backend/get_exams_to_grade.php", function(data) {
                 // console.log(data);
                 $("#result_holder").empty();
                 $("#result_holder").append(data);
             });
         })
 
-        function goToExamResult(student, exam_title) {
-            var form = $(`<form style="display:none;" action="ReviewExam.php" method="post"><input type="text" name="student" value=${student}><input type="text" name="exam_title" value=${exam_title}></form>`);
+        function autogradeExam(student, exam_title) {
+            var form = $(`<form style="display:none;" action="ReviewExam.php" method="post"><input type="text" name="student" value="${student}"><input type="text" name="exam_title" value="${exam_title}"></form>`);
             $("body").append(form);
             form.submit();
         }
 
-        function releaseExamResult(student, exam_title) {
-            // $.post("../backend/release_exam_result.php", ({
-            //         student: student,
-            //         exam_title: exam_title
-            //     }),
-            //     function(data) {
-
-            //     });
-            console.log($('#result_holder td:contains("${student}") td:contains("${exam_title}")'));
+        function autogradeExam(exam_id, student_id) {
+            $.post("/backend/autograde_student_exam.php", ({
+                exam_id: exam_id,
+                student_id: student_id
+            }));
+            $("[id*='" + exam_id + "']").remove();
         }
     </script>
 
