@@ -57,7 +57,7 @@
                     var form = $(`<form style="display:none;" action="Student.php" method="post"><input type="text" name="username" value=${username}></form>`);
                     $("body").append(form);
                     form.submit();
-                    // window.location.replace("./Student.html");
+                    // window.location.replace("./Student.php");
                 } else if (status === "TEACHER") {
                     var form = $(`<form style="display:none;" action="Instructor.php" method="post"><input type="text" name="username" value=${username}></form>`);
                     $("body").append(form);

@@ -10,12 +10,12 @@ JOIN User ON User.id=SER.student
 JOIN Result ON Result.id=SER.result
 JOIN ExamQuestion ON ExamQuestion.exam=SER.exam
 JOIN Question ON Question.id=ExamQuestion.question
-WHERE SER.student=[student id] && SER.exam ="'.intval($_GET['ser']).'"';
+WHERE SER.student=[student id] && SER.exam ="' . intval($_GET['ser']) . '"';
 //WHERE SER.exam="'.intval($_GET['ser']).'"';
 
 $result = mysqli_query($db, $query);
-if(!$result) {
-    if(mysqli_error($db)) {
+if (!$result) {
+    if (mysqli_error($db)) {
         print mysqli_error($db);
     }
 }
@@ -23,7 +23,7 @@ $rows = mysqli_fetch_all($result, MYSQLI_ASSOC);
 
 $table = '<table class="table dark"><tr><th>Prompt</th><th>Score</th><th>Max score</th><th>Comment</th>';
 foreach ($rows as $k => $v) {
-    $table .= '<tr><td>'.$v['prompt'].'</td><td>'.$v['score'].'</td><td>'.$v['max_score'].'</td><td>'.$v['comment'].'</td></tr>';
+    $table .= '<tr><td>' . $v['prompt'] . '</td><td>' . $v['score'] . '</td><td>' . $v['max_score'] . '</td><td>' . $v['comment'] . '</td></tr>';
 }
 
 $table .= '</table>';
@@ -43,7 +43,7 @@ echo '<!DOCTYPE html>
     <nav>
         <ul>
             <li>
-                <a href="Student.html">Home</a>
+                <a href="Student.php">Home</a>
             </li>
             <li>
                 <a href="ListExam.html">List Exams</a>
