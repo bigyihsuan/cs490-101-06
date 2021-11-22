@@ -33,9 +33,9 @@
             Menu
         </div>
     </nav>
-    <h1
-        style="text-align:center; justify-content: center; line-height: 400px; color: #ebebeb;">
-        <?php echo "Welcome {$_POST['username']}"; ?>
+    <h1 style="text-align:center; justify-content: center; line-height: 400px; color: #ebebeb;">
+        <?php session_start();
+        echo "Welcome {$_SESSION['logged_user']}"; ?>
     </h1>
 </body>
 
