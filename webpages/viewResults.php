@@ -50,13 +50,13 @@ $table .= '</table>';
     <nav>
         <ul>
             <li>
-                <a href="Student.php">Home</a>
+                <a href="./Student.php">Home</a>
             </li>
             <li>
-                <a href="ListExam.html">List Exams</a>
+                <a href="./ListExam.html">List Exams</a>
             </li>
             <li>
-                <a href="viewResults.php">Review Exam</a>
+                <a href="./viewResults.php">Review Exam</a>
             </li>
             <li>
                 <a class="active" href="../backend/logout.php">Log Out</a>
