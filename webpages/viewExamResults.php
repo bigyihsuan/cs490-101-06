@@ -5,14 +5,16 @@ include '../account.php';
 session_start();
 
 $logged_user = $_SESSION['logged_user'];
-
-$query = 'SELECT Question.prompt, Result.score, ExamQuestion.max_score, Result.comment
+$ser = intval($_GET['ser']);
+$query = <<<SQL
+SELECT Question.prompt, Result.score, ExamQuestion.max_score, Result.comment
 FROM studentexamresult AS SER
 JOIN User ON User.id=SER.student
 JOIN Result ON Result.id=SER.result
 JOIN ExamQuestion ON ExamQuestion.exam=SER.exam
 JOIN Question ON Question.id=ExamQuestion.question
-WHERE SER.student=$logged_user && SER.exam ="' . intval($_GET['ser']) . '"';
+WHERE SER.student={$logged_user} && SER.exam = {$ser};
+SQL;
 //WHERE SER.exam="'.intval($_GET['ser']).'"';
 
 $result = mysqli_query($db, $query);
