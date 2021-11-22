@@ -14,19 +14,19 @@
     <nav>
         <ul>
             <li>
-                <a href="./Instructor.php">Home</a>
+                <a href="Instructor.php">Home</a>
             </li>
             <li>
-                <a href="./AddQuestion.html">Add Questions</a>
+                <a href="AddQuestion.html">Add Questions</a>
             </li>
             <li>
-                <a href="./CreateExam.html">Create Exam</a>
+                <a href="CreateExam.html">Create Exam</a>
             </li>
             <li>
-                <a href="./AutoGradeExam.html">AutoGrade Exam</a>
+                <a href="AutoGradeExam.html">AutoGrade Exam</a>
             </li>
             <li>
-                <a href="./ReviewExamList.html">Review Exam</a>
+                <a href="ReviewExamList.html">Review Exam</a>
             </li>
 
             <li>
@@ -37,8 +37,7 @@
             Menu
         </div>
     </nav>
-    <h1 style="text-align:center; color: #ebebeb;">Review Student's Exam Grades
-        for edit and comment</h1>
+    <h1 style="text-align:center; color: #ebebeb;">Review Student's Exam Grades for edit and comment</h1>
 
     <form id="exam_holder" method="post">
         <?php
@@ -48,32 +47,30 @@
     </form>
 
     <script>
-    $("#exam_holder").on("submit", function(e) {
-        e.preventDefault();
-        var elements = $("[id$='id'], [id*='score_'], textarea")
-            .toArray().map(
-                ele => ele.innerText !== '' ? ele.innerText : $(ele)
-                .val());
+        $("#exam_holder").on("submit", function(e) {
+            e.preventDefault();
+            var elements = $("[id$='id'], [id*='score_'], textarea").toArray().map(
+                ele => ele.innerText !== '' ? ele.innerText : $(ele).val());
 
 
-        var ser_id = elements[0];
-        elements = elements.slice(1);
-        var chunked = [...chunks(elements, 3)].map(tup => ({
-            result_id: tup[0],
-            new_score: tup[1],
-            comment: tup[2]
-        }));
+            var ser_id = elements[0];
+            elements = elements.slice(1);
+            var chunked = [...chunks(elements, 3)].map(tup => ({
+                result_id: tup[0],
+                new_score: tup[1],
+                comment: tup[2]
+            }));
 
-        var obj = {
-            ser_id: ser_id,
-            new_results: chunked
-        };
-        // console.log(obj);
+            var obj = {
+                ser_id: ser_id,
+                new_results: chunked
+            };
+            // console.log(obj);
 
-        $.post("/backend/save_result.php", obj);
+            $.post("/backend/save_result.php", obj);
 
-        window.location.replace("/webpages/ReviewExamList.html");
-    });
+            window.location.replace("/webpages/ReviewExamList.html");
+        });
     </script>
 
 </body>
