@@ -15,20 +15,16 @@
                 <a href="Instructor.php">Home</a>
             </li>
             <li>
-                <a href="AddQuestion.html">Add Questions</a>
+                <a href="AddQuestion.php">Add Questions</a>
             </li>
             <li>
-                <a href="CreateExam.html">Create Exam</a>
+                <a href="CreateExam.php">Create Exam</a>
             </li>
             <li>
-                <a href="AutoGradeExam.html">AutoGrade Exam</a>
+                <a href="AutoGradeExam.php">AutoGrade Exam</a>
             </li>
             <li>
-                <a href="ReviewExamList.html">Review Exam</a>
-            </li>
-
-            <li>
-                <a class="active" href="/backend/logout.php">Log Out</a>
+                <a href="ReviewExamList.php">Review Exam</a>
             </li>
         </ul>
         <div class="handle">
