@@ -64,10 +64,11 @@
         });
     })
 
-    function autogradeExam(exam_id, student_id) {
+    function autogradeExam(exam_id, exam_title, student_name) {
         $.post("/backend/autograde_student_exam.php", ({
             exam_id: exam_id,
-            student_id: student_id
+            exam_title: exam_title,
+            student_name: student_name
         }));
         $("[id*='" + exam_id + "']").remove();
     }

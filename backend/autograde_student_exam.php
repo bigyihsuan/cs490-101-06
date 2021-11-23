@@ -2,8 +2,9 @@
 include(__DIR__ . "/../account.php");
 global $db;
 
-$exam_id = $_POST['exam_id'];
-$student_id = $_POST['student_id'];
+$exam_title = $_POST['exam_title'];
+$student_name = $_POST['student_name'];
+$exam_id = $POST['exam_id'];
 
 // $exam_id = 35;
 // $student_id = 15;
@@ -11,7 +12,8 @@ $student_id = $_POST['student_id'];
 $get_all_students_that_took_this_exam = <<<SQL
 SELECT DISTINCT student
 FROM StudentExamResult
-WHERE exam=$exam_id;
+JOIN User ON User.id=StudentExamResult.student
+WHERE exam=$exam_id && User.username="{$student_name}";
 SQL;
 
 ($result = $db->query($get_all_students_that_took_this_exam)) or die();
@@ -19,12 +21,16 @@ $student_ids = $result->fetch_all(MYSQLI_ASSOC);
 foreach ($student_ids as $row) {
     $student_id = $row['student'];
     $get_all_results_of_exam_for_student = <<<SQL
-    SELECT StudentExamResult.student AS student, StudentExamResult.exam AS exam, StudentExamResult.result AS result,
+    SELECT
+        StudentExamResult.student AS student,
+        StudentExamResult.exam AS exam,
+        StudentExamResult.result AS result,
         question, comment, response, solution, ExamQuestion.max_score AS max_score
     FROM `Result`
     JOIN StudentExamResult ON Result.id=StudentExamResult.result
     JOIN ExamQuestion ON ExamQuestion.id=Result.exam_question
     JOIN Question ON Question.id=ExamQuestion.question
+    JOIN User ON User.id=StudentExamResult.student
     WHERE StudentExamResult.student=$student_id;
     SQL;
     ($result = $db->query($get_all_results_of_exam_for_student)) or die();
