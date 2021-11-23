@@ -185,7 +185,7 @@ $("#questionForm").on("submit", function(e) {
     data.push(testCases);
     console.log(data);
     $.post("/backend/create_question.php", data);
-    getQuestionBank("question_bank");
+    getQuestionBank("question_bank", false);
 });
 </script>
 

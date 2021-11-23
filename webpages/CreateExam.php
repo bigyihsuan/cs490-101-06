@@ -66,7 +66,7 @@
                             $("#filters").append(data);
                             $("#filters").append(
                                 '<button id="filter_questions" onclick=filter()>Filter Questions</button>'
-                                )
+                            )
                         });
                     });
                     </script>
@@ -80,14 +80,14 @@
                     var constraint = $(
                         'input[name="filter_constraint"]:checked').val();
 
-                    getQuestionBank("question_bank", difficulty, category,
+                    getQuestionBank("question_bank", true, ifficulty, category,
                         constraint);
                 }
                 </script>
                 <div id="question_bank_div"
                     style="width:100%;margin:0 auto;margin-top:30px;margin-bottom:50px;text-align:left;">
                     <script>
-                    getQuestionBank("question_bank_div");
+                    getQuestionBank("question_bank_div", true);
                     </script>
                 </div>
 
@@ -125,13 +125,13 @@
                         .toArray()
                         .map(ele => ele.innerText !== '' ? ele
                             .innerText : $(ele).children(":first").val()
-                            );
+                        );
                     // console.log(questions);
 
                     var chunked = [...chunks(questions, 2)].map(tup =>
-                ({
-                        [tup[0]]: tup[1],
-                    }));
+                        ({
+                            [tup[0]]: tup[1],
+                        }));
                     // console.log(chunked);
 
                     if (examTitle === "") {
@@ -153,7 +153,7 @@
                             $(el).detach()
                         });
                     $("#exam_title").val('');
-                    getQuestionBank("question_bank");
+                    getQuestionBank("question_bank", true);
                 });
                 </script>
             </td>
@@ -171,7 +171,7 @@
 
         questionToAdd.children('td[id$="_add_to_exam"]').css("display", "none");
         questionToAdd.children('td[id$="_remove_from_exam"]').css("display",
-        "");
+            "");
         questionToAdd.children('td[id$="_score"]').css("display", "");
 
         $("#exam_question_holder").append(questionToAdd);
@@ -181,7 +181,7 @@
     function removeFromExam(question_id) {
         console.log(question_id);
         $("#" + question_id).children('[id$="_add_to_exam"]').css("display",
-        "");
+            "");
         $("#" + question_id).children('[id$="_remove_from_exam"]').css(
             "display", "none");
         $("#" + question_id).children('[id$="_score"]').css("display", "none");

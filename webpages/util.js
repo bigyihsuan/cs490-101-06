@@ -1,8 +1,9 @@
-function getQuestionBank(id, difficulty = "", category = "", constraint = "") {
+function getQuestionBank(id, making_exam, difficulty = "", category = "", constraint = "") {
     var values = {
         difficulty: "",
         category: "",
-        constraint: ""
+        constraint: "",
+        making_exam: making_exam
     };
 
     if (difficulty !== "") {
