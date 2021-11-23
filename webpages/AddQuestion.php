@@ -131,7 +131,7 @@
                 <div id="question_bank"
                     style="width:90%;margin:0 auto;margin-top:30px;margin-bottom:50px;text-align:left;">
                     <script>
-                    getQuestionBank("question_bank");
+                    getQuestionBank("question_bank", false);
                     </script>
                 </div>
             </td>
