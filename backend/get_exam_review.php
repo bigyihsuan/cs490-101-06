@@ -10,8 +10,10 @@ $get_ser_id = <<<SQL
 SELECT StudentExamResult.id FROM StudentExamResult
 JOIN User ON User.id=StudentExamResult.student
 JOIN Exam ON Exam.id=StudentExamResult.exam
-WHERE User.username="{$student}" && Exam.title="{$exam_title}"
+WHERE User.username="{$student}" && Exam.title="{$exam_title};"
 SQL;
+error_log("[get_exam_review] $get_ser_id");
+
 ($result = $db->query($get_ser_id)) or die();
 $rows = $result->fetch_all(MYSQLI_ASSOC);
 error_log(print_r($rows, true));
