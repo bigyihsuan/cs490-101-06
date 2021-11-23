@@ -22,7 +22,7 @@
                 <a href="AutoGradeExam.php">AutoGrade Exam</a>
             </li>
             <li>
-                <a href="ReviewExamList.php">Review Exam</a>
+                <a href="ReviewExamList.html">Review Exam</a>
             </li>
             <li>
                 <a class="active" href="/backend/logout.php">Log Out</a>
@@ -32,8 +32,7 @@
             Menu
         </div>
     </nav>
-    <h1
-        style="text-align:center; justify-content: center; line-height: 400px; color: #ebebeb;">
+    <h1 style="text-align:center; justify-content: center; line-height: 400px; color: #ebebeb;">
         <?php session_start();
         echo "Welcome {$_SESSION['logged_username']}"; ?>
     </h1>

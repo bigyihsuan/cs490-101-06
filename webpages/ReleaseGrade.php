@@ -24,7 +24,7 @@
                 <a href="AutoGradeExam.php">AutoGrade Exam</a>
             </li>
             <li>
-                <a href="ReviewExamList.php">Review Exam</a>
+                <a href="ReviewExamList.html">Review Exam</a>
             </li>
             <li>
                 <a class="active" href="/backend/logout.php">Log Out</a>
@@ -40,32 +40,32 @@
     <div id="result_holder"></div>
 
     <script>
-    $("document").ready(function() {
-        // console.log("getting");
-        $.post("../backend/get_result_list.php", function(data) {
-            // console.log(data);
-            $("#result_holder").empty();
-            $("#result_holder").append(data);
+        $("document").ready(function() {
+            // console.log("getting");
+            $.post("../backend/get_result_list.php", function(data) {
+                // console.log(data);
+                $("#result_holder").empty();
+                $("#result_holder").append(data);
+            });
         });
-    });
 
-    function goToExamResult(student, exam_title) {
-        console.log(student + " " + exam_title);
-        var form = $(`<form style="display:none;" action="ReviewExam.php" method="post">
+        function goToExamResult(student, exam_title) {
+            console.log(student + " " + exam_title);
+            var form = $(`<form style="display:none;" action="ReviewExam.php" method="post">
             <input type="text" name="student" value="${student}">
             <input type="text" name="exam_title" value="${exam_title}">
             </form>`);
-        $("body").append(form);
-        form.submit();
-    }
+            $("body").append(form);
+            form.submit();
+        }
 
-    function releaseExamResult(student, exam_title, element) {
-        $.post("../backend/release_exam.php", ({
-            student: student,
-            exam_title: exam_title
-        }));
-        $(element).parent().parent().remove();
-    }
+        function releaseExamResult(student, exam_title, element) {
+            $.post("../backend/release_exam.php", ({
+                student: student,
+                exam_title: exam_title
+            }));
+            $(element).parent().parent().remove();
+        }
     </script>
 
 </body>
