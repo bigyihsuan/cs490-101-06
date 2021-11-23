@@ -80,7 +80,7 @@
                     var constraint = $(
                         'input[name="filter_constraint"]:checked').val();
 
-                    getQuestionBank("question_bank", true, ifficulty, category,
+                    getQuestionBank("question_bank", true, difficulty, category,
                         constraint);
                 }
                 </script>
