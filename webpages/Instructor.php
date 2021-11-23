@@ -24,6 +24,9 @@
             <li>
                 <a href="ReviewExamList.php">Review Exam</a>
             </li>
+            <li>
+                <a class="active" href="/backend/logout.php">Log Out</a>
+            </li>
         </ul>
         <div class="handle">
             Menu
@@ -32,7 +35,7 @@
     <h1
         style="text-align:center; justify-content: center; line-height: 400px; color: #ebebeb;">
         <?php session_start();
-        echo "Welcome {$_SESSION['logged_user']}"; ?>
+        echo "Welcome {$_SESSION['logged_username']}"; ?>
     </h1>
 </body>
 

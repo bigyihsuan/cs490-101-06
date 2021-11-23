@@ -1,3 +1,6 @@
+<?php
+echo <<<HTML
+
 <!DOCTYPE html>
 <html>
 
@@ -8,7 +11,7 @@
         integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1"
         crossorigin="anonymous">
     <link href="student.css" rel="stylesheet">
-    <title>AddQuestions Page</title>
+    <title>ReviewExamList Page</title>
 
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script
@@ -41,7 +44,6 @@
             <li>
                 <a href="ReviewExamList.php">Review Exam</a>
             </li>
-
             <li>
                 <a class="active" href="/backend/logout.php">Log Out</a>
             </li>
@@ -103,11 +105,7 @@
                                 </td>
                             </tr>
                         </table>
-                    </div><br>
-
-
-
-
+                    </div><br />
                     <br />
                     <div>
                         <button type="button" class="btn btn-primary"
@@ -139,55 +137,57 @@
 
         </tr>
     </table>
-</body>
-
-<script>
-function addTag(tag = '') {
-    var div = document.createElement('div');
-    var html = `
+    <script>
+    function addTag(tag = '') {
+        var div = document.createElement('div');
+        var html = `
 	<div class="row align-middle border" style="padding:0.3em">
 		<div class="input-group">
-			<input type="text" id="row${$('#testCases').children().length}Input" placeholder="Input" />
-			<input type="text" id="row${$('#testCases').children().length}Output" placeholder="Result" />
+			<input type="text" id="row\$\{$('#testCases').children().length\}Input" placeholder="Input" />
+			<input type="text" id="row\$\{$('#testCases').children().length\}Output" placeholder="Result" />
 			<button type="button" class="btn btn-secondary" title="Delete" onclick="removeTag(this)">&#10060;</button>
 		</div>
 	</div>`;
-    // <!-- <input class="form-control" type="number" id="counter" min="0" value="0" /> -->
+        // <!-- <input class="form-control" type="number" id="counter" min="0" value="0" /> -->
 
-    div.id = "row" + $('#testCases').children().length;
-    div.class = "container-fluid";
-    div.innerHTML = html;
-    $('#testCases').append(div);
-    return $('#testCases').children().length;
-}
-
-function removeAllTags() {
-    $('#testCases').empty();
-}
-
-function removeTag(ele) {
-    $(ele).parents("[id^=row]").empty();
-}
-
-$("#questionForm").on("submit", function(e) {
-    e.preventDefault();
-    var data = $(this).serializeArray();
-    for (var i = 0; i < $("#testCases").children().length; i++) {
-        var input = "row".concat(i, "Input");
-        var output = "row".concat(i, "Output");
-        data.push({
-            "name": "test_cases_" + i,
-            "value": JSON.stringify({
-                [$(`#${input}`).val()]: $(`#${output}`)
-                    .val()
-            })
-        });
+        div.id = "row" + $('#testCases').children().length;
+        div.class = "container-fluid";
+        div.innerHTML = html;
+        $('#testCases').append(div);
+        return $('#testCases').children().length;
     }
-    data.push(testCases);
-    console.log(data);
-    $.post("../backend/add_question.php", data);
-    getQuestionBank("question_bank");
-});
-</script>
+
+    function removeAllTags() {
+        $('#testCases').empty();
+    }
+
+    function removeTag(ele) {
+        $(ele).parents("[id^=row]").empty();
+    }
+
+    $("#questionForm").on("submit", function(e) {
+        e.preventDefault();
+        var data = $(this).serializeArray();
+        for (var i = 0; i < $("#testCases").children().length; i++) {
+            var input = "row".concat(i, "Input");
+            var output = "row".concat(i, "Output");
+            data.push({
+                "name": "test_cases_" + i,
+                "value": JSON.stringify({
+                    [$(`#${input}`).val()]: $(
+                            `#${output}`)
+                        .val()
+                })
+            });
+        }
+        data.push(testCases);
+        console.log(data);
+        $.post("../backend/add_question.php", data);
+        getQuestionBank("question_bank");
+    });
+    </script>
+
+</body>
 
 </html>
+HTML;
