@@ -2,9 +2,9 @@
 include(__DIR__ . "/../account.php");
 global $db;
 
+$exam_id = $_POST['exam_id'];
 $exam_title = $_POST['exam_title'];
 $student_name = $_POST['student_name'];
-$exam_id = $POST['exam_id'];
 
 error_log("[autograde_student_exam] $exam_title | $student_name");
 
