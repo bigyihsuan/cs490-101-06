@@ -3,7 +3,7 @@ include(__DIR__ . "/../account.php");
 include(__DIR__ . "/data_models.php");
 global $db;
 
-error_log(print_r("{$_POST['question']}, {$_POST['category']}, {$_POST['difficulty']}, {$_POST['useConstraint']}, {$_POST['constraint']}", true));
+// error_log(print_r("{$_POST['question']}, {$_POST['category']}, {$_POST['difficulty']}, {$_POST['useConstraint']}, {$_POST['constraint']}", true));
 
 $question = new Question(
     $db->escape_string($_POST['question']),
@@ -12,7 +12,7 @@ $question = new Question(
     isset($_POST['useConstraint']) ? $db->escape_string($_POST['constraint']) : ""
 );
 
-error_log(print_r("{$_POST['question']}, {$_POST['category']}, {$_POST['difficulty']}, {$_POST['useConstraint']}, {$_POST['constraint']}", true));
+// error_log(print_r("{$_POST['question']}, {$_POST['category']}, {$_POST['difficulty']}, {$_POST['useConstraint']}, {$_POST['constraint']}", true));
 
 $test_cases = array();
 
@@ -46,12 +46,12 @@ if (strcmp($question->constraint, "") !== 0) {
     ($result3 = $db->query("SELECT * FROM `ConsTypes` ORDER BY id;")) or die();
     $constraints = $result3->fetch_all(MYSQLI_ASSOC);
     $ind = array_search($question->constraint, array_column($constraints, 'cons'));
-    $question->constraint_id = $categories[$ind]['id'];
+    $question->constraint_id = $constraints[$ind]['id'];
 } else {
     $question->constraint_id = 0;
 }
 error_log(print_r($question->constraint_id, true));
-error_log(print_r("{$_POST['question']}, {$_POST['category']}, {$_POST['difficulty']}, {$_POST['useConstraint']}, {$_POST['constraint']}", true));
+// error_log(print_r("{$_POST['question']}, {$_POST['category']}, {$_POST['difficulty']}, {$_POST['useConstraint']}, {$_POST['constraint']}", true));
 
 $question_insertion =
     "INSERT INTO `Question` (`prompt`, `difficulty`, `category`, `cons`)
