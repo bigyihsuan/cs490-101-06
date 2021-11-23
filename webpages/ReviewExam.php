@@ -41,6 +41,8 @@
 
     <form id="exam_holder" method="post">
         <?php
+        $exam_title = $_POST['exam_title'];
+        $student = $_POST['student'];
         include(__DIR__ . "/../backend/get_exam_review.php");
         ?>
         <button type="submit">Save Review</button>

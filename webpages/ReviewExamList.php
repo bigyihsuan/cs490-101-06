@@ -68,7 +68,7 @@ echo <<<HTML
 
         function goToExamResult(student, exam_title) {
             console.log(student + " " + exam_title);
-            alert(student + " " + exam_title);
+            // alert(student + " " + exam_title);
             var form = $(`<form style="display:none;" action="ReviewExam.php" method="post">
             <input type="text" name="student" value="${student}">
             <input type="text" name="exam_title" value="${exam_title}">
