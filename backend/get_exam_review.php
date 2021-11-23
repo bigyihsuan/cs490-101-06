@@ -2,8 +2,10 @@
 include(__DIR__ . "/../account.php");
 global $db;
 
-// $exam_title = $_POST['exam_title'];
-// $student = $_POST['student'];
+error_log(print_r($_POST, true));
+
+$exam_title = $_POST['exam_title'];
+$student = $_POST['student'];
 error_log("[get_exam_review] $student $exam_title");
 
 $get_ser_id = <<<SQL
