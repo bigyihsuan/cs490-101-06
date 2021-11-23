@@ -3,7 +3,7 @@ function getQuestionBank(id, making_exam, difficulty = "", category = "", constr
         difficulty: "",
         category: "",
         constraint: "",
-        making_exam: making_exam
+        "making_exam": making_exam
     };
 
     if (difficulty !== "") {

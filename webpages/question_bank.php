@@ -68,7 +68,7 @@ $html = <<<HTML
 HTML;
 $rows = $result->fetch_all(MYSQLI_ASSOC);
 
-$makingExam = $_POST['making_exam'];
+$making_exam = isset($_POST['making_exam']) ? false : $_POST['making_exam'];
 foreach ($rows as $row) {
     $html .= <<<HTML
         <tr id="question_{$row['id']}" class="item">
@@ -80,7 +80,7 @@ foreach ($rows as $row) {
             <td id="question_{$row['id']}_max_score" style='display:none;'>
                 <input type="number" placeholder="Question Score"/>
             </td>
-            <td id="question_{$row['id']}_add_to_exam" {!$makingExam? "style="display:none;" : ""}>
+            <td id="question_{$row['id']}_add_to_exam" {!$making_exam? "style="display:none;" : ""}>
                 <button type="button" onclick=addToExam('question_{$row['id']}')>Add to Exam</button>
             </td>
             <td id="question_{$row['id']}_remove_from_exam" style="display:none;">
