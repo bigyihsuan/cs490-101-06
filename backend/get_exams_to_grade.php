@@ -35,7 +35,7 @@ foreach ($rows as $row) {
             <td style="display:none;">{$row['student_id']}</td>
             <td>{$row['student_name']}</td>
             <td>{$row['exam_title']}</td>
-            <td><button type="button" onclick="autogradeExam({$row['exam_id']}, {$row['exam_title']}, {$row['student_name']})">Autograde Exam</button></td>
+            <td><button type="button" onclick="autogradeExam({$row['exam_id']}, `{$row['exam_title']}`, `{$row['student_name']}`)">Autograde Exam</button></td>
         </tr>
     HTML;
 }
