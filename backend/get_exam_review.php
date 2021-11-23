@@ -13,7 +13,9 @@ JOIN Exam ON Exam.id=StudentExamResult.exam
 WHERE User.username="{$student}" && Exam.title="{$exam_title}"
 SQL;
 ($result = $db->query($get_ser_id)) or die();
-$ser_id = $result->fetch_all(MYSQLI_ASSOC)[0]['id'];
+$rows = $result->fetch_all(MYSQLI_ASSOC);
+error_log(print_r($rows, true));
+$ser_id = $rows[0]['id'];
 
 // get exam, and associated results
 $get_results_of_student_on_exam = <<<SQL
