@@ -1,4 +1,3 @@
 <?php
-$dir = __DIR__ . "/login.html";
-header("Location: {$dir}");
+header("Location: /webpages/login.html");
 exit;
