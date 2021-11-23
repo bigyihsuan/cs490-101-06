@@ -68,7 +68,7 @@ $html = <<<HTML
 HTML;
 $rows = $result->fetch_all(MYSQLI_ASSOC);
 
-$making_exam = isset($_POST['making_exam']) ? false : $_POST['making_exam'];
+$making_exam = isset($_POST['making_exam']) ? $_POST['making_exam'] : false;
 foreach ($rows as $row) {
     $html .= <<<HTML
         <tr id="question_{$row['id']}" class="item">
