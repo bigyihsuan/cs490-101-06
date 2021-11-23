@@ -39,40 +39,35 @@
     <h1 style="text-align:center; color: #ebebeb;">Review Student's Exam Grades
         for edit and comment</h1>
 
-    <form id="exam_holder" method="post">
-        <?php
-        include(__DIR__ . "/../backend/get_exam_review.php");
-        ?>
-        <button type="submit">Save Review</button>
-    </form>
+    <div id="result_holder"></div>
 
     <script>
-    $("#exam_holder").on("submit", function(e) {
-        e.preventDefault();
-        var elements = $("[id$='id'], [id*='score_'], textarea")
-            .toArray().map(
-                ele => ele.innerText !== '' ? ele.innerText : $(ele)
-                .val());
-
-
-        var ser_id = elements[0];
-        elements = elements.slice(1);
-        var chunked = [...chunks(elements, 3)].map(tup => ({
-            result_id: tup[0],
-            new_score: tup[1],
-            comment: tup[2]
-        }));
-
-        var obj = {
-            ser_id: ser_id,
-            new_results: chunked
-        };
-        // console.log(obj);
-
-        $.post("/backend/save_result.php", obj);
-
-        window.location.replace("/webpages/ReviewExamList.html");
+    $("document").ready(function() {
+        // console.log("getting");
+        $.post("../backend/get_result_list.php", function(data) {
+            // console.log(data);
+            $("#result_holder").empty();
+            $("#result_holder").append(data);
+        });
     });
+
+    function goToExamResult(student, exam_title) {
+        console.log(student + " " + exam_title);
+        var form = $(`<form style="display:none;" action="ReviewExam.php" method="post">
+        <input type="text" name="student" value="${student}">
+        <input type="text" name="exam_title" value="${exam_title}">
+        </form>`);
+        $("body").append(form);
+        form.submit();
+    }
+
+    function releaseExamResult(student, exam_title, element) {
+        $.post("../backend/release_exam.php", ({
+            student: student,
+            exam_title: exam_title
+        }));
+        $(element).parent().parent().remove();
+    }
     </script>
 
 </body>

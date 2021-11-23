@@ -52,139 +52,37 @@ echo <<<HTML
             Menu
         </div>
     </nav>
-    <header id="aa">
-        <h1 style="text-align:center; color: #ebebeb;">Add Questions</h1>
-    </header>
-    <table>
-        <tr>
-            <td style="width:30%;padding-left:10px;padding-right:10px;padding-top:35px;"
-                valign="top">
+    <h1 style="text-align:center; color: #ebebeb;">Review Student's Exam Grades for edit and comment</h1>
 
-                <form id="questionForm" method="post">
-                    <div id="aa">
-                        <label class="desc" for="question" id="question"
-                            style="text-align:center;">Question Box</label>
-                        <div>
-                            <textarea id="question" name="question"
-                                spellcheck="true"
-                                style="width:90%;height:100px;"
-                                tabindex="1"></textarea>
-                        </div>
-                    </div><br>
-                    <!--
-                    <div id="aa">
-                        <label class="desc" for="function_name" id="function_name">Function Name</label>
-                        <div><input class="field text fn" id="function_name" name="function_name" size="20" tabindex="2" type="text" value=""></div>
-                    </div><br>
-                    -->
-                    <div id="questionCategory">
-                        <script>
-                        getCategories("questionCategory");
-                        </script>
-                    </div><br>
+    <div id="result_holder"></div>
 
-                    <div id="questionDifficulty">
-                        <script>
-                        getDifficulties("questionDifficulty");
-                        </script>
-                    </div><br>
-
-                    <div id="questionConstraint">
-                        <table>
-                            <tr>
-                                <td>
-                                    <input type="checkbox" name="useConstraint"
-                                        id="useConstraint">
-                                    <label for="useConstraint">Use
-                                        Constraint?</label>
-                                </td>
-                                <td>
-                                    <script>
-                                    getConstraints("questionConstraint");
-                                    </script>
-                                </td>
-                            </tr>
-                        </table>
-                    </div><br />
-                    <br />
-                    <div>
-                        <button type="button" class="btn btn-primary"
-                            onclick="addTag()">Add Test Case</button>
-                        <button type="button" class="btn btn-primary"
-                            onclick="removeAllTags()">Remove All Test
-                            Cases</button>
-                        <button id="saveForm" name="saveForm" type="submit"
-                            class="btn btn-primary">Submit Question</button>
-                    </div>
-
-                    <div id="testCases" class="container-fluid"></div>
-                </form>
-
-
-
-            </td>
-
-            <td style="width:70%;padding-left:10px;padding-right:10px;padding-top:35px;"
-                valign="top">
-                <p style="color: #ebebeb;">Selected questions</p>
-                <div id="question_bank"
-                    style="width:90%;margin:0 auto;margin-top:30px;margin-bottom:50px;text-align:left;">
-                    <script>
-                    getQuestionBank("question_bank");
-                    </script>
-                </div>
-            </td>
-
-        </tr>
-    </table>
     <script>
-    function addTag(tag = '') {
-        var div = document.createElement('div');
-        var html = `
-	<div class="row align-middle border" style="padding:0.3em">
-		<div class="input-group">
-			<input type="text" id="row\$\{$('#testCases').children().length\}Input" placeholder="Input" />
-			<input type="text" id="row\$\{$('#testCases').children().length\}Output" placeholder="Result" />
-			<button type="button" class="btn btn-secondary" title="Delete" onclick="removeTag(this)">&#10060;</button>
-		</div>
-	</div>`;
-        // <!-- <input class="form-control" type="number" id="counter" min="0" value="0" /> -->
-
-        div.id = "row" + $('#testCases').children().length;
-        div.class = "container-fluid";
-        div.innerHTML = html;
-        $('#testCases').append(div);
-        return $('#testCases').children().length;
-    }
-
-    function removeAllTags() {
-        $('#testCases').empty();
-    }
-
-    function removeTag(ele) {
-        $(ele).parents("[id^=row]").empty();
-    }
-
-    $("#questionForm").on("submit", function(e) {
-        e.preventDefault();
-        var data = $(this).serializeArray();
-        for (var i = 0; i < $("#testCases").children().length; i++) {
-            var input = "row".concat(i, "Input");
-            var output = "row".concat(i, "Output");
-            data.push({
-                "name": "test_cases_" + i,
-                "value": JSON.stringify({
-                    [$(`#${input}`).val()]: $(
-                            `#${output}`)
-                        .val()
-                })
+        $("document").ready(function() {
+            // console.log("getting");
+            $.post("../backend/get_result_list.php", function(data) {
+                // console.log(data);
+                $("#result_holder").empty();
+                $("#result_holder").append(data);
             });
+        });
+
+        function goToExamResult(student, exam_title) {
+            console.log(student + " " + exam_title);
+            var form = $(`<form style="display:none;" action="ReviewExam.php" method="post">
+            <input type="text" name="student" value="${student}">
+            <input type="text" name="exam_title" value="${exam_title}">
+            </form>`);
+            $("body").append(form);
+            form.submit();
         }
-        data.push(testCases);
-        console.log(data);
-        $.post("../backend/add_question.php", data);
-        getQuestionBank("question_bank");
-    });
+
+        function releaseExamResult(student, exam_title, element) {
+            $.post("../backend/release_exam.php", ({
+                student: student,
+                exam_title: exam_title
+            }));
+            $(element).parent().parent().remove();
+        }
     </script>
 
 </body>
