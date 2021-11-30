@@ -67,11 +67,13 @@ foreach ($student_ids as $row) {
         $constraint_name = "";
         $cases = array();
 
-        $fun_name = preg_split('/\(/', $test_cases[0]['input'])[0];
+        $fun_name = preg_split('/ /', preg_split('/\(/', $test_cases[0]['input'])[0])[1];
         // error_log(print_r($fun_name, true));
         // $fun_name = preg_split('/\(/', $test_cases[0]['input'])[0];
         // error_log(strpos($exam_result['response'], "("));
-        $student_fun_name = substr($exam_result['response'], 4, strpos($exam_result['response'], "(") - 4);
+
+        // check function name
+        $student_fun_name = preg_split('/ /', preg_split('/\(/', $exam_result['response'])[0])[1];
         error_log(print_r($student_fun_name, true));
         if ($student_fun_name !== $fun_name) {
             $exam_result['response'] = preg_filter("/$student_fun_name/", "/$fun_name/", $exam_result['response']);
