@@ -15,7 +15,7 @@ $get_all_students_that_took_this_exam = <<<SQL
 SELECT DISTINCT student
 FROM StudentExamResult
 JOIN User ON User.id=StudentExamResult.student
-WHERE exam=$exam_id && User.username="{$student_name}";
+WHERE exam=$exam_id && User.username="$student_name";
 SQL;
 
 ($result = $db->query($get_all_students_that_took_this_exam)) or die();
@@ -33,7 +33,7 @@ foreach ($student_ids as $row) {
     JOIN ExamQuestion ON ExamQuestion.id=Result.exam_question
     JOIN Question ON Question.id=ExamQuestion.question
     JOIN User ON User.id=StudentExamResult.student
-    WHERE StudentExamResult.student=$student_id;
+    WHERE StudentExamResult.student=$student_id && StudentExamResult.exam=$exam_id;
     SQL;
     ($result = $db->query($get_all_results_of_exam_for_student)) or die();
     $student_results = $result->fetch_all(MYSQLI_ASSOC);
@@ -53,13 +53,21 @@ foreach ($student_ids as $row) {
         ($result = $db->query($get_test_cases_of_question)) or die();
         $test_cases = $result->fetch_all(MYSQLI_ASSOC);
 
+        error_log(print_r($test_cases, true));
+        error_log(count($test_cases));
+
         $constraint = $test_cases[0]['constraint_name'];
         $hasConstraint = $constraint !== "None";
-        $test_case_count = count($test_cases) + 1 + $hasConstraint ? 1 : 0;
+        $test_case_count = (count($test_cases) + 1) + ($hasConstraint ? 1 : 0);
         $max_score = $exam_result['max_score'];
         $score_per_case = $max_score / $test_case_count;
         $current_score = 0;
         $comment = "";
+
+
+        error_log("max_score: $max_score");
+        error_log("test_case_count: $test_case_count");
+        error_log("score_per_case: $score_per_case");
 
         $input_code = "";
         $expected_output = "";
@@ -67,16 +75,24 @@ foreach ($student_ids as $row) {
         $constraint_name = "";
         $cases = array();
 
-        $fun_name = preg_split('/ /', preg_split('/\(/', $test_cases[0]['input'])[0])[1];
+        // error_log($test_cases[0]['input']);
+        // error_log(preg_split('/\(/', $test_cases[0]['input'])[0]);
+        // error_log(print_r(preg_split('/ /', preg_split('/\(/', $test_cases[0]['input'])[0]), true));
+        $fun_name = preg_split('/\(/', $test_cases[0]['input'])[0];
+        // $fun_name = preg_split('/ /', preg_split('/\(/', $test_cases[0]['input'])[0])[1];
+
         // error_log(print_r($fun_name, true));
         // $fun_name = preg_split('/\(/', $test_cases[0]['input'])[0];
         // error_log(strpos($exam_result['response'], "("));
 
         // check function name
         $student_fun_name = preg_split('/ /', preg_split('/\(/', $exam_result['response'])[0])[1];
-        error_log(print_r($student_fun_name, true));
+
+        error_log("[AUTOGRADE] teacher solution: $fun_name");
+        error_log("[AUTOGRADE] student response: $student_fun_name");
+
         if ($student_fun_name !== $fun_name) {
-            $exam_result['response'] = preg_filter("/$student_fun_name/", "/$fun_name/", $exam_result['response']);
+            $exam_result['response'] = preg_filter("/$student_fun_name/", "$fun_name", $exam_result['response']);
             $comment .= "Incorrect function name: 0\n";
         } else {
             $comment .= "Correct function name: +$score_per_case\n";
@@ -85,8 +101,11 @@ foreach ($student_ids as $row) {
 
         foreach ($test_cases as $test_case) {
             // echo "$student_id $question_id " . print_r($test_case, true) . "\n";
-            $input_code .= "print({$test_case['input']})\n";
-            // echo "{$test_case['input']}\n";
+            $tc = $test_case['input'];
+            $tc = str_replace('"', '\\"', $tc);
+            error_log("{$test_case['input']}");
+            error_log("{$tc}");
+            $input_code .= "print({$tc})\n";
             $cases[] = $test_case['input'];
             $expected_output .= $test_case['output'] . "\n";
             $constraint = $test_case['search_string'];
@@ -98,6 +117,8 @@ foreach ($student_ids as $row) {
         $actual_output = shell_exec("python3 -c \"{$input_code}\"");
         $expected_output = trim($expected_output);
         $actual_output = trim($actual_output);
+
+        error_log($actual_output);
 
         $expected_output = array_map(function ($e) {
             return (string)$e;

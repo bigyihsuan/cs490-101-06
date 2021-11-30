@@ -12,7 +12,8 @@ FROM StudentExamResult
 JOIN Exam ON Exam.id=StudentExamResult.exam
 JOIN User ON User.id=StudentExamResult.student
 JOIN Result ON Result.id=StudentExamResult.result
-WHERE StudentExamResult.released=0;
+-- WHERE StudentExamResult.released=0
+;
 SQL;
 ($result = $db->query($get_exam_list)) or die();
 $rows = $result->fetch_all(MYSQLI_ASSOC);

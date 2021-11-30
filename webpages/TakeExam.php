@@ -29,7 +29,8 @@
             Menu
         </div>
     </nav>
-    <h1 style="text-align:left; justify-content: center; line-height: 100px; color: #ebebeb;">
+    <h1
+        style="text-align:left; justify-content: center; line-height: 100px; color: #ebebeb;">
         Exam Start Now!!!</h1>
     <form id="exam_holder">
         <?php
@@ -38,30 +39,30 @@
         <button type="submit">Submit Exam</button>
     </form>
     <script>
-        $("#exam_holder").on("submit", function(e) {
-            e.preventDefault();
-            var elements = $("[id$='id'], textarea").toArray().map(
-                ele => ele.innerText !== '' ? ele.innerText : $(ele)
-                .val());
+    $("#exam_holder").on("submit", function(e) {
+        e.preventDefault();
+        var elements = $("[id$='id'], textarea").toArray().map(
+            ele => ele.innerText !== '' ? ele.innerText : $(ele)
+            .val());
 
-            var exam_id = elements[0];
-            elements = elements.slice(1);
-            // console.log(elements);
+        var exam_id = elements[0];
+        elements = elements.slice(1);
+        // console.log(elements);
 
-            var chunked = [...chunks(elements, 2)].map(tup => ({
-                exam_question_id: tup[0],
-                student_response: tup[1]
-            }));
+        var chunked = [...chunks(elements, 2)].map(tup => ({
+            exam_question_id: tup[0],
+            student_response: tup[1]
+        }));
 
-            var obj = {
-                exam_id: exam_id,
-                student_responses: chunked
-            };
-            // console.log(obj);
-            $.post("/backend/create_result.php", obj);
+        var obj = {
+            exam_id: exam_id,
+            student_responses: chunked
+        };
+        // console.log(obj);
+        $.post("/backend/create_result.php", obj);
 
-            window.location.replace("/webpages/ListExam.html");
-        });
+        window.location.replace("/webpages/ListExam.html");
+    });
     </script>
 </body>
 
