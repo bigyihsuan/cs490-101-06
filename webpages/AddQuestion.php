@@ -103,10 +103,6 @@
                             </tr>
                         </table>
                     </div><br>
-
-
-
-
                     <br />
                     <div>
                         <button type="button" class="btn btn-primary"
@@ -120,11 +116,7 @@
 
                     <div id="testCases" class="container-fluid"></div>
                 </form>
-
-
-
             </td>
-
             <td style="width:70%;padding-left:10px;padding-right:10px;padding-top:35px;"
                 valign="top">
                 <p style="color: #ebebeb;">Selected questions</p>
@@ -150,7 +142,7 @@
                         var constraint = $(
                             'input[name="filter_constraint"]:checked').val();
 
-                        getQuestionBank("question_bank", true, difficulty,
+                        getQuestionBank("question_bank", false, difficulty,
                             category,
                             constraint);
                     }
@@ -213,7 +205,8 @@ $("#questionForm").on("submit", function(e) {
     data.push(testCases);
     console.log(data);
     $.post("/backend/create_question.php", data);
-    getQuestionBank("question_bank", false);
+    location.reload(); // refresh the page on submit
+    // getQuestionBank("question_bank", false);
 });
 </script>
 
