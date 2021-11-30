@@ -49,7 +49,7 @@ $student_results = $result->fetch_all(MYSQLI_ASSOC);
 $results = <<<HTML
 <h1>$exam_title</h1>
 <p id="ser_id" style="display:none;">{$ser_id}</p>
-<table id="exam_results" align="center" border="1px" style="width: 600px; line-height: 40px;">
+<table id="exam_results" align="center" border="1px" style="width: 600px; line-height: 40px;background: #ebebeb;">
 <thead>
     <td>Student Response</td>
     <td>Student Score</td>

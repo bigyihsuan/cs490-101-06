@@ -32,7 +32,7 @@ $rows = $result->fetch_all(MYSQLI_ASSOC);
 $questions = <<<HTML
 <h1>$title</h1>
 <p id="exam_id" style="display:none;">$exam_id</p>
-<table id="exam_questions" style="width: 600px; line-height: 40px; align: center; border: 1px;">
+<table id="exam_questions" style="width: 600px; line-height: 40px; align: center; border: 1px; background-color:#ebebeb">
 HTML;
 
 foreach ($rows as $row) {

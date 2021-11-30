@@ -117,7 +117,7 @@
                     <div id="testCases" class="container-fluid"></div>
                 </form>
             </td>
-            <td style="width:70%;padding-left:10px;padding-right:10px;padding-top:35px;"
+            <td style="width:70%;padding-left:10px;padding-right:10px;padding-top:35px;background: #ebebeb;"
                 valign="top">
                 <p style="color: #ebebeb;">Selected questions</p>
                 <div id="filters">

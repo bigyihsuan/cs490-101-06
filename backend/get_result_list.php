@@ -16,7 +16,7 @@ SQL;
 $rows = $result->fetch_all(MYSQLI_ASSOC);
 
 $result_table = <<<HTML
-<table id="result_table" style="width:50%;background:#ededed;padding-left:10px;padding-right:10px;padding-top:35px;" valign="top">
+<table id="result_table" style="width:50%;padding-left:10px;padding-right:10px;padding-top:35px;background-color:#ebebeb" valign="top">
     <thead>
         <!-- <th id="result_id" style="display:none;">ID</th> -->
         <th>Student</th>

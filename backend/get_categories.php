@@ -1,3 +1,16 @@
+<html>
+<head>
+<title>...</title>
+
+<style type = "text/css">
+
+   label{color: #ebebeb;}
+
+</style>
+</head>
+
+<body>
+
 <?php
 include(__DIR__ . "/../account.php");
 global $db;
@@ -20,3 +33,9 @@ $html .= $html_end;
 
 // return questions ot caller
 echo $html;
+?>
+
+
+
+</body>
+</html>
