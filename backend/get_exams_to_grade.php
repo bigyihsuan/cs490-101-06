@@ -3,7 +3,7 @@ include(__DIR__ . "/../account.php");
 global $db;
 
 $get_exam_list = <<<SQL
-SELECT
+SELECT DISTINCT
     StudentExamResult.exam AS exam_id,
     User.username AS student_name,
     User.id AS student_id,

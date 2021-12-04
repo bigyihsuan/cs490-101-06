@@ -55,7 +55,7 @@ error_log(print_r($student_results, true));
 
 $results = <<<HTML
 <h1>$exam_title by $student</h1>
-<p id="ser_id" style="display:none;">{$ser_id}</p>
+<!-- <p id="ser_id" style="display:none;">{$ser_id}</p> -->
 <table id="exam_results" align="center" border="1px" style="width: 600px; line-height: 40px;background: #ebebeb;">
 <thead>
     <td>Student Response</td>
@@ -69,6 +69,9 @@ foreach ($student_results as $student_result) {
     // keys: exam_title, result, max_score
     // error_log(print_r($row, true));
     $ser_id = $student_result['id'];
+    $result = $student_result['result'];
+    $test_case = $student_result['test_case'];
+
     $response = $student_result['response'];
     $score = $student_result['score'];
     $max_score = $student_result['part_max_score'];
@@ -76,11 +79,12 @@ foreach ($student_results as $student_result) {
 
     $result_row = <<<HTML
     <tr>
-        <td id="result_{$student_result['result']}_id" style="display:none;">{$student_result['result']}</td>
+        <td id="result_{$result}_id" style="display:none;">{$result}</td>
+        <td id="test_case_{$test_case}_id" style="display:none;">{$test_case}</td>
         <td>{$response}</td>
-        <td><input id="score_{$ser_id}" type="number" value="{$score}"></td>
+        <td><input id="score_{$result}_{$test_case}" type="number" value="{$score}"></td>
         <td>{$max_score}</td>
-        <td><textarea id="comment_{$ser_id}" type="text" cols="40" rows="10">{$comment}</textarea></td>
+        <td><textarea id="comment_{$result}_{$test_case}" type="text" cols="40" rows="10">{$comment}</textarea></td>
     </tr>
     HTML;
     $results .= $result_row;
