@@ -62,13 +62,23 @@ $db->query($question_insertion);
 $question_id = $db->insert_id;
 $testcase_ids = array();
 foreach ($test_cases as $case) {
-    $insert_testcases =
-        "INSERT INTO `TestCase` (`input`, `output`) VALUES ";
+    $insert_testcases = <<<SQL
+    INSERT INTO `TestCase` (`input`, `output`) VALUES 
+    SQL;
     $insert_testcases .= "(\"{$case->in}\", \"{$case->out}\"),";
     $insert_testcases = substr($insert_testcases, 0, strlen($insert_testcases) - 1) . ";";
     $db->query($insert_testcases);
     $testcase_ids[] = $db->insert_id;
 }
+
+// if ($question->constraint_id != 0) {
+//     // insert into the test case table a dummy test case for this constraint
+//     $insert_constraint = <<<SQL
+//     INSERT INTO `TestCase` (`input`, `output`) VALUES
+//     ($question->constraint_id, $question->constraint_id);
+//     SQL;
+
+// }
 
 $link_question_to_testcases = "INSERT INTO `QuestionTestCase` (`question`, `test_case`) VALUES ";
 foreach ($testcase_ids as $testcase_id) {

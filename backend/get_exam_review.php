@@ -29,22 +29,29 @@ SELECT
     StudentExamResult.exam,
     StudentExamResult.result,
     Result.response,
-    Result.score,
-    ExamQuestion.max_score,
-    Result.comment
+    ExamQuestion.max_score AS question_max_score,
+    ResultTestCase.score,
+    ResultTestCase.max_score AS part_max_score,
+    ResultTestCase.comment,
+    ResultTestCase.result,
+    ResultTestCase.test_case
 FROM StudentExamResult
 JOIN User ON User.id=StudentExamResult.student
 JOIN Exam ON Exam.id=StudentExamResult.exam
 JOIN Result ON Result.id=StudentExamResult.result
 JOIN ExamQuestion ON ExamQuestion.id=Result.exam_question
+JOIN ResultTestCase ON ResultTestCase.result=Result.id
 WHERE
     User.username="{$student}" && Exam.title="{$exam_title}"
 ;
 SQL;
+
+error_log($get_results_of_student_on_exam);
+
 ($result = $db->query($get_results_of_student_on_exam)) or die();
 $student_results = $result->fetch_all(MYSQLI_ASSOC);
 
-// error_log(print_r($rows, true));
+error_log(print_r($student_results, true));
 
 $results = <<<HTML
 <h1>$exam_title by $student</h1>
@@ -53,7 +60,7 @@ $results = <<<HTML
 <thead>
     <td>Student Response</td>
     <td>Student Score</td>
-    <td>Question Max Score</td>
+    <td>Part Max Score</td>
     <td>Comment</td>
 </thead>
 HTML;
@@ -64,7 +71,7 @@ foreach ($student_results as $student_result) {
     $ser_id = $student_result['id'];
     $response = $student_result['response'];
     $score = $student_result['score'];
-    $max_score = $student_result['max_score'];
+    $max_score = $student_result['part_max_score'];
     $comment = $student_result['comment'];
 
     $result_row = <<<HTML
@@ -78,10 +85,36 @@ foreach ($student_results as $student_result) {
     HTML;
     $results .= $result_row;
 }
+// error_log($results);
+
+$get_scores = <<<SQL
+SELECT
+    SUM(DISTINCT ResultTestCase.score) AS student_score,
+    SUM(DISTINCT ExamQuestion.max_score) AS exam_score
+FROM StudentExamResult
+JOIN User ON User.id=StudentExamResult.student
+JOIN Exam ON Exam.id=StudentExamResult.exam
+JOIN Result ON Result.id=StudentExamResult.result
+JOIN ExamQuestion ON ExamQuestion.id=Result.exam_question
+JOIN ResultTestCase ON ResultTestCase.result=Result.id
+WHERE
+    User.username="{$student}" && Exam.title="{$exam_title}"
+;
+SQL;
+($result = $db->query($get_scores)) or die();
+$scores = $result->fetch_all(MYSQLI_ASSOC)[0];
+
+error_log(print_r($scores, true));
+
+$results .= <<<HTML
+<td><b>Total Score:</b></td>
+<td>{$scores['student_score']}</td>
+<td>/</td>
+<td>{$scores['exam_score']}</td>
+HTML;
 
 $results .= <<<HTML
 </table>
 HTML;
-// error_log($results);
 
 echo $results;

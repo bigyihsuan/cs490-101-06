@@ -49,8 +49,8 @@
             Menu
         </div>
     </nav>
-    <h1 style="text-align:center; color: #ebebeb;">Review Student's Exam Grades
-        for edit and comment</h1>
+    <h1 style="text-align:center; color: #ebebeb;">Select an exam to autograde:
+    </h1>
 
     <div id="result_holder"></div>
 

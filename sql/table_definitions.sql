@@ -92,3 +92,14 @@ CREATE TABLE StudentExamResult (
     CONSTRAINT studentexam_result_fk FOREIGN KEY (result) REFERENCES Result(id) ON DELETE CASCADE,
     PRIMARY KEY (id)
 );
+
+CREATE TABLE ResultTestCase (
+    result INT NOT NULL,
+    test_case INT NOT NULL,
+    score FLOAT(3) NOT NULL,
+    max_score FLOAT(3) NOT NULL,
+    comment TEXT NOT NULL DEFAULT "",
+    CONSTRAINT resulttestcase_result_fk FOREIGN KEY (result) REFERENCES Result(id) ON DELETE CASCADE,
+    -- CONSTRAINT resulttestcase_testcase_fk FOREIGN KEY (test_case) REFERENCES TestCase(id) ON DELETE CASCADE,
+    PRIMARY KEY (result, test_case)
+);
