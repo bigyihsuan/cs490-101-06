@@ -6,29 +6,29 @@ session_start();
 $id = intval($_SESSION['logged_user']);
 
 $query = <<<SQL
-SELECT
-    *,
-    studentexamresult.id AS ser,
-    exam.id AS examid    
+SELECT DISTINCT
+    exam.id AS examid,
+    Exam.title AS title
 FROM studentexamresult
 LEFT JOIN exam ON exam.id=studentexamresult.exam
 WHERE student="{$id}" && released=1;
 SQL;
 // print $query;
-$result = mysqli_query($db, $query);
-$rows = mysqli_fetch_all($result, MYSQLI_ASSOC);
+$result = $db->query($query);
+$rows = $result->fetch_all(MYSQLI_ASSOC);
 // var_dump($rows);
 
-$table = '<table>';
-$table .= '<tr><th>Exam</th><th>Result</th>';
+$table = '<table style="background:white">';
+$table .= '<tr><th>Exam</th></tr>';
 foreach ($rows as $k => $v) {
     $exam_id = intval($v['examid']);
     $title = htmlspecialchars($v['title']);
-    $result = intval($v['result']);
+    // $result = intval($v['result']);
 
     $table .= <<<HTML
-    <tr><td><a href="viewExamResults.php?ser=$exam_id">{$title}</a></td>
-    <td>{$result}</td></tr>
+    <tr>
+        <td><a href="viewExamResults.php?ser=$exam_id&student=$id">{$title}</a></td>
+    </tr>
     HTML;
 }
 $table .= '</table>';
@@ -69,39 +69,9 @@ $table .= '</table>';
     <h1
         style="text-align:left; justify-content: center; line-height: 100px; color: #ebebeb;">
         View Results</h1>
-    <!--<form id="exam_holder">-->
     <?php
-    //      include(__DIR__ . "/../backend/get_exam_form.php");
-    print $table;
+    echo $table;
     ?>
-    <!-- <button type="submit">Submit Exam</button>
-    </form>-->
-    <script>
-    $("#exam_holder").on("submit", function(e) {
-        e.preventDefault();
-        var elements = $("[id$='id'], textarea").toArray().map(
-            ele => ele.innerText !== '' ? ele.innerText : $(ele)
-            .val());
-
-        var exam_id = elements[0];
-        elements = elements.slice(1);
-        // console.log(elements);
-
-        var chunked = [...chunks(elements, 2)].map(tup => ({
-            exam_question_id: tup[0],
-            student_response: tup[1]
-        }));
-
-        var obj = {
-            exam_id: exam_id,
-            student_responses: chunked
-        };
-        // console.log(obj);
-        $.post("/backend/create_result.php", obj);
-
-        window.location.replace("/webpages/ListExam.html");
-    });
-    </script>
 </body>
 
 </html>
