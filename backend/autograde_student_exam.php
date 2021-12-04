@@ -52,6 +52,9 @@ foreach ($student_ids as $row) {
             JOIN ConsTypes ON ConsTypes.id=Question.cons
             WHERE QuestionTestCase.question=$question_id;
         SQL;
+
+        error_log($get_test_cases_of_question);
+
         ($result = $db->query($get_test_cases_of_question)) or die();
         $test_cases = $result->fetch_all(MYSQLI_ASSOC);
 
@@ -182,7 +185,7 @@ foreach ($student_ids as $row) {
                         $constc["score"] = 0;
                     }
                     $constc["max_score"] = $score_per_case;
-                    $constc['tc_id'] = -1;
+                    $constc['tc_id'] = -2;
                     $result_to_testcase[] = $constc;
                     break;
                 }
@@ -198,7 +201,7 @@ foreach ($student_ids as $row) {
                         $constc["score"] = 0;
                     }
                     $constc["max_score"] = $score_per_case;
-                    $constc['tc_id'] = -1;
+                    $constc['tc_id'] = -2;
                     $result_to_testcase[] = $constc;
                     break;
                 }
@@ -214,7 +217,7 @@ foreach ($student_ids as $row) {
                         $constc["score"] = 0;
                     }
                     $constc["max_score"] = $score_per_case;
-                    $constc['tc_id'] = -1;
+                    $constc['tc_id'] = -2;
                     $result_to_testcase[] = $constc;
                     break;
                 }

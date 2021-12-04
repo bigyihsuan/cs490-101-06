@@ -89,8 +89,8 @@ foreach ($student_results as $student_result) {
 
 $get_scores = <<<SQL
 SELECT
-    SUM(DISTINCT ResultTestCase.score) AS student_score,
-    SUM(DISTINCT ExamQuestion.max_score) AS exam_score
+    SUM(ResultTestCase.score) AS student_score,
+    SUM(ResultTestCase.max_score) AS exam_score
 FROM StudentExamResult
 JOIN User ON User.id=StudentExamResult.student
 JOIN Exam ON Exam.id=StudentExamResult.exam
