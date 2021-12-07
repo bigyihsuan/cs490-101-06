@@ -69,6 +69,7 @@ $results = <<<HTML
     <td>Student Response</td>
     <td>Student Score</td>
     <td>Part Max Score</td>
+    <td>Question Max Score</td>
     <td>Comment</td>
 </thead>
 HTML;
@@ -83,6 +84,7 @@ foreach ($student_results as $student_result) {
     $response = $student_result['response'];
     $score = $student_result['score'];
     $max_score = $student_result['part_max_score'];
+    $question_max_score = $student_result['question_max_score'];
     $comment = $student_result['comment'];
 
     $result_row = <<<HTML
@@ -92,6 +94,7 @@ foreach ($student_results as $student_result) {
         <td>{$response}</td>
         <td>{$score}</td>
         <td>{$max_score}</td>
+        <td>{$question_max_score}</td>
         <td>{$comment}</td>
     </tr>
     HTML;
